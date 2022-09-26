@@ -19,7 +19,5 @@ from maintenance_main_view import views as maintenance_main_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path(
-        "", maintenance_main_views.maintenance_main_view, name="maintenance_main_view"
-    ),
+    path("", maintenance_main_views.maintenance_main_view, name="maintenance"),
 ]
