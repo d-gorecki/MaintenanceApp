@@ -11699,3 +11699,18 @@ body {
   font-size: 0.75rem;
   border-radius: 0.25rem !important;
 }
+
+.machine-available {
+  color: green;
+  display: inline;
+}
+
+.machine-nonwork {
+  color: red;
+  display: inline;
+}
+
+.machine-attention {
+  color: orange;
+  display: inline;
+}
