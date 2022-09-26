@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "malfunctions",
     "machines",
     "departments",
+    "users",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -128,3 +129,4 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
+AUTH_USER_MODEL = "users.User"

@@ -1,6 +1,7 @@
 from django.db import models
 from machines.models import MachineGroup, Machine
 from django.contrib.auth.models import User
+from django.conf import settings
 
 
 class MaintenanceType(models.Model):
@@ -22,7 +23,9 @@ class MaintenanceSchedule(models.Model):
     machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
     maintenance_type = models.ForeignKey(MaintenanceType, on_delete=models.CASCADE)
     planned_date = models.DateField()
-    user = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default=0)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.SET_DEFAULT, default=0
+    )
     # on user deletion app should reassign another user to planned maintenance
 
 
@@ -31,6 +34,8 @@ class MaintenanceReport(models.Model):
     schedule = models.ForeignKey(
         MaintenanceSchedule, on_delete=models.SET_DEFAULT, default=0
     )
-    user = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default=0)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.SET_DEFAULT, default=0
+    )
     description = models.TextField()
     image = models.ImageField(upload_to="media/maintenance_reports")
