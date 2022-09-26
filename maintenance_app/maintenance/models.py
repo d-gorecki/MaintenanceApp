@@ -33,4 +33,4 @@ class MaintenanceReport(models.Model):
     )
     user = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default=0)
     description = models.TextField()
-    image = models.ImageField(upload_to="media/")
+    image = models.ImageField(upload_to="media/maintenance_reports")
