@@ -22,5 +22,15 @@ class MaintenanceSchedule(models.Model):
     machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
     maintenance_type = models.ForeignKey(MaintenanceType, on_delete=models.CASCADE)
     planned_date = models.DateField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default=0)
     # on user deletion app should reassign another user to planned maintenance
+
+
+class MaintenanceReport(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    schedule = models.ForeignKey(
+        MaintenanceSchedule, on_delete=models.SET_DEFAULT, default=0
+    )
+    user = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default=0)
+    description = models.TextField()
+    image = models.ImageField(upload_to="media/")
