@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_extensions",
+    "crispy_forms",
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 AUTH_USER_MODEL = "users.User"
+CRISPY_TEMPLATE_PACK = "uni_form"

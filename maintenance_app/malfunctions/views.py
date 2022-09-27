@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import MalfunctionReport, MalfunctionPending
+from .forms import ReportForm
+from users.models import User
 
 
 def malfunctions_pending(request):
@@ -7,3 +9,26 @@ def malfunctions_pending(request):
     context = {"malfunctions": malfunctions}
 
     return render(request, "malfunctions/malfunctions_pending.html", context)
+
+
+def malfunctions_report(request):
+    form = ReportForm()
+    user = User.objects.first()  # TODO: pass logged user
+
+    if request.method == "POST":
+        form = ReportForm(request.POST)
+        if form.is_valid():
+            malfunction_report = MalfunctionReport(
+                machine=form.cleaned_data.get("machine_multiple_field"),
+                user=user,
+                description=form.cleaned_data.get("description"),
+                image=form.cleaned_data.get("image"),
+            )
+            malfunction_report.save()
+        else:
+            pass
+            # print(form.errors)
+
+    context = {"form": form}
+
+    return render(request, "malfunctions/malfunctions_report.html", context)

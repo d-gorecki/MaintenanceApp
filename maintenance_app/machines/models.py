@@ -23,3 +23,6 @@ class Machine(models.Model):
     machine_status = models.CharField(
         max_length=32, choices=STATUS, default="available"
     )
+
+    def __str__(self):
+        return f"{self.factory_number}: {self.name}"
