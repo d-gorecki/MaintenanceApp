@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import MaintenanceType
+from .forms import MaintenanceTypeForm
 
 
 def maintenance_schemes(request):
-    schemes = MaintenanceType.objects.all()
+    schemes = MaintenanceType.objects.all().order_by("pk")
     context = {"schemes": schemes}
 
     return render(request, "maintenance/maintenance_schemes.html", context)
@@ -31,4 +32,31 @@ def maintenance_schemes_type(request, type):
 
 
 def maintenance_schemes_add(request):
-    pass
+    form = MaintenanceTypeForm()
+
+    if request.method == "POST":
+        form = MaintenanceTypeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/maintenance/")
+
+    context = {"form": form}
+
+    return render(request, "maintenance/maintenance_schemes_add.html", context)
+
+
+def maintenance_schemes_edit(
+    request, pk
+):  # TODO: create reusable maintenance_schemes_add class and inherit it by edit class
+    scheme = MaintenanceType.objects.get(pk=pk)
+    form = MaintenanceTypeForm(instance=scheme)
+
+    if request.method == "POST":
+        form = MaintenanceTypeForm(request.POST, instance=scheme)
+        if form.is_valid():
+            form.save()
+            return redirect("/maintenance/")
+
+    context = {"form": form}
+
+    return render(request, "maintenance/maintenance_schemes_edit.html", context)

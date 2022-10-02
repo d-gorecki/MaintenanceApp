@@ -1,0 +1,24 @@
+{% extends 'maintenance/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2 class="top-h2">Edit maintenance type</h2>
+<hr>
+<form action="#" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <h5>Select type:</h5>
+        {{ form.type }}
+    </div>
+    <div class="form-group">
+        <h5>Select machine group:</h5>
+        {{ form.machine_group }}
+    </div>
+    <div class="form-group">
+        <h5>Maintenance description:</h5>
+        {{ form.description }}
+    </div>
+    <hr>
+    <button type="submit" class="btn btn-dark">Submit</button>
+</form>
+
+{% endblock %}

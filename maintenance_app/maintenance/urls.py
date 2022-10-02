@@ -20,4 +20,10 @@ urlpatterns = [
         views.maintenance_schemes_type,
         name="maintenance_schemes_type",
     ),
+    path("schemes/add/", views.maintenance_schemes_add, name="maintenance_schemes_add"),
+    path(
+        "schemes/edit/<int:pk>",
+        views.maintenance_schemes_edit,
+        name="maintenance_schemes_edit",
+    ),
 ]

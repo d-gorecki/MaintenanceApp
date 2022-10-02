@@ -15,6 +15,7 @@
                     <th>Maintenance type</th>
                     <th>Machine group</th>
                     <th>Description</th>
+                    <th>Edit</th>
                 </tr>
             </thead>
             <tfoot>
@@ -23,6 +24,7 @@
                     <th>Maintenance type</th>
                     <th>Machine group</th>
                     <th>Description</th>
+                    <th>Edit</th>
                 </tr>
             </tfoot>
             <tbody>
@@ -32,6 +34,7 @@
                     <td><a href="{% url 'maintenance_schemes_type' scheme.type %}">{{ scheme.type }}</a></td>
                     <td><a href="{% url 'maintenance_schemes_group' scheme.machine_group_id %}">{{ scheme.machine_group.name }}</a></td>
                     <td><a href="{% url 'maintenance_schemes_detail' scheme.pk %}">{{ scheme.description|slice:"20" }}...</a></td>
+                    <td><a href="{% url 'maintenance_schemes_edit' scheme.pk %}" class="button">Edit</a></td>
                 </tr>
             {% endfor %}
             </tbody>

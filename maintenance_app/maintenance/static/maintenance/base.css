@@ -11713,8 +11713,21 @@ body {
 .machine-attention {
   color: orange;
   display: inline;
+
+
+h2 {
+ margin: 20px;
+ }
+
+#btn-self !important {
+  font-size: 5px;
 }
 
-.top-h2 {
- margin-top: 20px;
- }
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    font-size: 50px;
+    color: initial;
+}
