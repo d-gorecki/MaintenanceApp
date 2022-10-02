@@ -1,0 +1,52 @@
+{% extends 'maintenance/base.html' %}
+{% block content %}
+<h2>Pending malfunctions</h2>
+<hr>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Awarie w toku
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Factory number</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Factory number</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            {% for malfunction in malfunctions %}
+                <tr>
+                    <td>{{ malfunction.pk }}</td>
+                    <td>{{ malfunction.machine.factory_number }}</td>
+                    <td>{{ malfunction.machine.name }}</td>
+                    <td>{{ malfunction.machine.department.name }}</td>
+                    <td>{{ malfunction.malfunction_report.user }}</td>
+                    <td>{{ malfunction.malfunction_report.datetime }}</td>
+                    <td>{{ malfunction.malfunction_report.description }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}
