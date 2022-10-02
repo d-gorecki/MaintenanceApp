@@ -3,7 +3,7 @@ from machines.models import MachineGroup, Machine
 from django.contrib.auth.models import User
 from django.conf import settings
 
-
+# TODO help_text
 class MaintenanceType(models.Model):
     MAINTENANCE_TYPES = (
         ("week", "weekly maintenance"),
