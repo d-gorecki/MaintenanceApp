@@ -5,6 +5,9 @@ from departments.models import Department
 class MachineGroup(models.Model):
     name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
 
 class Machine(models.Model):
     STATUS = (
