@@ -10,8 +10,8 @@ class MaintenanceType(models.Model):
         ("month", "monthly maintenance"),
         ("half year", "half year maintenance"),
         ("year", "annual maintenance"),
-        ("two years", "two years maintenacne"),
-        ("three years", "three years maintenance"),
+        ("two-years", "two years maintenacne"),
+        ("three-years", "three years maintenance"),
         ("additional", "non-standard maintenacne"),
     )
     type = models.CharField(max_length=50, choices=MAINTENANCE_TYPES, default="week")
