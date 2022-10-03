@@ -13,4 +13,4 @@ class ReportForm(forms.Form):
             attrs={"class": "form-control", "placeholder": "Malfunction description"}
         )
     )
-    image = forms.ImageField(required=False)
+    image = forms.ImageField()

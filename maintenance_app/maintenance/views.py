@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from .models import MaintenanceType, MaintenanceSchedule, MaintenanceReport
-from .forms import MaintenanceTypeForm, MaintenanceScheduleForm
+from .forms import MaintenanceTypeForm, MaintenanceScheduleForm, MaintenanceReportForm
 from users.models import User
 
 
@@ -110,3 +111,18 @@ def maintenance_reports_detail(request, pk):
 
     context = {"report": report}
     return render(request, "maintenance/maintenance_reports_detail.html", context)
+
+
+def maintenance_reports_add(request):
+    form = MaintenanceReportForm()
+
+    if request.method == "POST":
+        form = MaintenanceReportForm(request.POST, request.FILES)
+        if form.is_valid():
+            report = form.save(commit=False)
+            report.user = request.user
+            report.save()
+            return redirect("/maintenance/schedules/reports/")
+
+    context = {"form": form}
+    return render(request, "maintenance/maintenance_reports_add.html", context)

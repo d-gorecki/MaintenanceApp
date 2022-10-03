@@ -39,13 +39,13 @@ class MaintenanceSchedule(models.Model):
 class MaintenanceReport(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     schedule = models.ForeignKey(
-        MaintenanceSchedule, on_delete=models.SET_DEFAULT, default=0
+        MaintenanceSchedule, on_delete=models.SET_DEFAULT, default=1
     )
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.SET_DEFAULT, default=0
+        settings.AUTH_USER_MODEL, on_delete=models.SET_DEFAULT, default=3
     )
     description = models.TextField()
-    image = models.ImageField(upload_to="maintenance_reports")
+    image = models.ImageField(upload_to="media/maintenance_reports")
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

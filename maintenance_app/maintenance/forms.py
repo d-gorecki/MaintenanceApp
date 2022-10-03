@@ -1,5 +1,5 @@
 from django import forms
-from .models import MaintenanceType, MaintenanceSchedule
+from .models import MaintenanceType, MaintenanceSchedule, MaintenanceReport
 from machines.models import MachineGroup
 from django.forms import Textarea, Select, DateInput
 
@@ -29,4 +29,14 @@ class MaintenanceScheduleForm(forms.ModelForm):
             "maintenance_type": Select(attrs={"class": "form-select"}),
             "user": Select(attrs={"class": "form-select"}),
             "planned_date": DateInput(attrs={"type": "date", "class": "form-control"}),
+        }
+
+
+class MaintenanceReportForm(forms.ModelForm):
+    class Meta:
+        model = MaintenanceReport
+        fields = ("schedule", "description", "image")
+        widgets = {
+            "schedule": Select(attrs={"class": "form-select"}),
+            "description": Textarea(attrs={"class": "form-control"}),
         }

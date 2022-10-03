@@ -43,4 +43,9 @@ urlpatterns = [
         views.maintenance_reports_detail,
         name="maintenance_reports_detail",
     ),
+    path(
+        "schedules/reports/add",
+        views.maintenance_reports_add,
+        name="maintenance_reports_add",
+    ),
 ]

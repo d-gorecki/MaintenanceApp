@@ -1,0 +1,45 @@
+{% extends 'maintenance/base.html' %}
+{% block content %}
+<h2>Malfunction Reports</h2>
+<hr>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Malfunction reports
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Machine</th>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Machine</th>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            {% for report in malfunction_reports %}
+                <tr>
+                    <td>{{ report.pk }}</td>
+                    <td>{{ report.machine }}</td>
+                    <td>{{ report.user }}</td>
+                    <td>{{ report.datetime }}</td>
+                    <td><a href="{% url 'malfunctions_reports_detail' report.pk %}">{{ report.description|slice:"20" }}...</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

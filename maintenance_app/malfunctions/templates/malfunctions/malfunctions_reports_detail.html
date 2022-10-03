@@ -1,0 +1,25 @@
+{% extends 'maintenance/base.html' %}
+{% block content %}
+<h2>Malfunction Report</h2>
+<hr>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Maintenance report <strong>#{{ malfunction_report.pk }}</strong> for <strong>{{ malfunction_report.machine }}</strong>
+    </div>
+    <div class="card-body">
+        <div><strong>Machine: </strong>{{ malfunction_report.machine }}</div>
+        <hr>
+        <div><strong>User: </strong>{{ malfunction_report.user }}</div>
+        <hr>
+        <div><strong>Date: </strong>{{ malfunction_report.datetime }}</div>
+        <hr>
+        <div><strong>Description:</strong></div>
+        <div>{{ malfunction_report.description }}</div>
+        <hr>
+        <div><strong>Attachements:</strong></div>
+        <img src="{{ malfunction_report.image }}">
+    </div>
+</div>
+
+{% endblock %}

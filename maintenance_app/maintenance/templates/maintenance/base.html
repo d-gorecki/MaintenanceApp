@@ -7,6 +7,7 @@
         <meta name="description" content="Maintenance app">
         <meta name="author" content="Dawid Górecki">
         <title>MaintenanceApp</title>
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="{% static 'maintenance/base.css' %}" rel="stylesheet">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -93,42 +94,52 @@
                                     </div>
                                 </nav>
                             </div>
-                            <div class="sb-sidenav-menu-heading">Addons</div>
+                            <div class="sb-sidenav-menu-heading">Machine park</div>
                             <a class="nav-link" href="{% url 'machines_comparison' %}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Park maszynowy
+                                Machines
                             </a>
+
+                            <div class="sb-sidenav-menu-heading">Malfunctions</div>
                             <a class="nav-link" href="{% url 'malfunctions_pending' %}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Awarie w toku
+                                Pending
                             </a>
-                            <a class="nav-link" href="{% url 'malfunctions_report' %}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Zgłoś awarię
+                            <a class="nav-link" href="{% url 'malfunctions_reports' %}">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                                Malfunction reports
+                            </a>
+                            <a class="nav-link" href="{% url 'malfunctions_reports_add' %}">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                                Report malfunction
                             </a>
 
                             <div class="sb-sidenav-menu-heading">Maintenance schemes</div>
                             <a class="nav-link" href="{% url 'maintenance_schemes' %}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Overwiew
                             </a>
                             <a class="nav-link" href="{% url 'maintenance_schemes_add' %}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
                                 Add new scheme
                             </a>
 
                             <div class="sb-sidenav-menu-heading">Maintenance schedules</div>
                             <a class="nav-link" href="{% url 'maintenance_schedules' %}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Overwiew
                             </a>
                             <a class="nav-link" href="{% url 'maintenance_schedules_add' %}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
                                 Add new schedule
                             </a>
                             <a class="nav-link" href="{% url 'maintenance_reports' %}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Reports
+                            </a>
+                            <a class="nav-link" href="{% url 'maintenance_reports_add' %}">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                                Add report
                             </a>
 
                         </div>
@@ -142,6 +153,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
+                        <br>
                         {% block content %}
                         {% endblock %}
 
