@@ -2,6 +2,7 @@ from django.db import models
 from machines.models import MachineGroup, Machine
 from django.contrib.auth.models import User
 from django.conf import settings
+from PIL import Image
 
 # TODO help_text
 class MaintenanceType(models.Model):
@@ -18,6 +19,9 @@ class MaintenanceType(models.Model):
     description = models.TextField()
     machine_group = models.ForeignKey(MachineGroup, on_delete=models.CASCADE, default=0)
 
+    def __str__(self):
+        return f"{self.type}: {self.machine_group}"
+
 
 class MaintenanceSchedule(models.Model):
     machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
@@ -27,6 +31,9 @@ class MaintenanceSchedule(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.SET_DEFAULT, default=0
     )
     # on user deletion app should reassign another user to planned maintenance
+
+    def __str__(self):
+        return f"{self.maintenance_type}: {self.planned_date}"
 
 
 class MaintenanceReport(models.Model):
@@ -38,4 +45,14 @@ class MaintenanceReport(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.SET_DEFAULT, default=0
     )
     description = models.TextField()
-    image = models.ImageField(upload_to="media/maintenance_reports")
+    image = models.ImageField(upload_to="maintenance_reports")
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        img = Image.open(self.image.path)
+
+        if img.height > 800 or img.width > 800:
+            output_size = (800, 800)
+            img.thumbnail(output_size)
+            img.save(self.image.path)

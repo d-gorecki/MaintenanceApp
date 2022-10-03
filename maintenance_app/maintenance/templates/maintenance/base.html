@@ -107,7 +107,7 @@
                                 Zgłoś awarię
                             </a>
 
-                            <div class="sb-sidenav-menu-heading">Maintenance</div>
+                            <div class="sb-sidenav-menu-heading">Maintenance schemes</div>
                             <a class="nav-link" href="{% url 'maintenance_schemes' %}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Overwiew
@@ -115,6 +115,20 @@
                             <a class="nav-link" href="{% url 'maintenance_schemes_add' %}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Add new scheme
+                            </a>
+
+                            <div class="sb-sidenav-menu-heading">Maintenance schedules</div>
+                            <a class="nav-link" href="{% url 'maintenance_schedules' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Overwiew
+                            </a>
+                            <a class="nav-link" href="{% url 'maintenance_schedules_add' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Add new schedule
+                            </a>
+                            <a class="nav-link" href="{% url 'maintenance_reports' %}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Reports
                             </a>
 
                         </div>

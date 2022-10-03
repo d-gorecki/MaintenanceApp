@@ -1,0 +1,46 @@
+{% extends 'maintenance/base.html' %}
+{% block content %}
+<h2>Maintenance Schedules</h2>
+<hr>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Maintenance schemes
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Maintenance type</th>
+                    <th>Machine</th>
+                    <th>Planned date</th>
+                    <th>Responsible</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Maintenance type</th>
+                    <th>Machine</th>
+                    <th>Planned date</th>
+                    <th>Responsible</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            {% for schedule in schedules %}
+                <tr>
+                    <td>{{ schedule.pk }}</td>
+                    <td>{{ schedule.maintenance_type.type }}</td>
+                    <td>{{ schedule.machine.name }}</td>
+                    <td>{{ schedule.planned_date }}</td>
+                    <td>{{ schedule.user }}</td>
+                    <td><a href="{% url 'maintenance_schedules_edit' schedule.pk %}" class="button">Edit</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
