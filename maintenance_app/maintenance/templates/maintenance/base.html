@@ -91,6 +91,7 @@
                                     </div>
                                 </nav>
                             </div>
+                        {% if user.group == "maintenance" or user.group == "manager" or user.is_superuser %}
                         <div class="sb-sidenav-menu-heading">Core</div>
                             <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
@@ -151,6 +152,7 @@
                         <div class="small">Logged in as:</div>
                         <a href="{% url 'users_profile' %}">{{ user.username }}</a>&nbsp;|&nbsp;<a href="{% url 'users_logout' %}">Logout</a>
                     </div>
+                    {% endif %}
                     {% endif %}
                 </nav>
             </div>

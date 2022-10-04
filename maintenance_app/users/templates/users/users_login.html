@@ -3,6 +3,18 @@
 {% block content %}
 <h2 class="top-h2">Log in: </h2>
 <hr>
+<div class="container-fluid">
+    <div class="row">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="alert-{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
 <div class="card mb-4">
     <div class="card-header"><i class="fas fa-table me-1"></i>Logging in:</div>
     <div class="card-body">
@@ -10,9 +22,13 @@
             {% csrf_token %}
             <div class="form-group">
             {{ form|crispy }}
+            </div>
             <hr>
             <button type="submit" class="btn btn-dark">Log in</button>
         </form>
     </div>
+</div>
+</div>
+</div>
 </div>
 {% endblock %}
