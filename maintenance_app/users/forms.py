@@ -9,7 +9,7 @@ class ManagerUserCreationForm(UserCreationForm):
             "username",
             "password1",
             "password2",
-            "groups",
+            "group",
             "first_name",
             "last_name",
             "department",

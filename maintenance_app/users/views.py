@@ -16,8 +16,6 @@ def users_profile(request):
                 request, f"Password has been changed for account {request.user}"
             )
             return redirect("users_login")
-        else:
-            return HttpResponse(f"<h1>{form.error}</h1>")
 
     form = PasswordChangeForm(user=request.user)
     context = {"form": form}
@@ -27,16 +25,14 @@ def users_profile(request):
 
 def users_add(request):
     if request.method == "POST":
-        form = ManagerUserCreationForm()
+        form = ManagerUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data["username"]
             messages.success(
                 request, f"Account created successfully for user {username}"
             )
-            return redirect("users_login")
-        else:
-            return HttpResponse(f"<h1>{form.error}</h1>")
+            return redirect("users_profile")
 
     form = ManagerUserCreationForm()
     context = {"form": form}
