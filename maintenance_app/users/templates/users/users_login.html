@@ -1,0 +1,18 @@
+{% extends 'maintenance/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2 class="top-h2">Log in: </h2>
+<hr>
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table me-1"></i>Logging in:</div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+            {{ form|crispy }}
+            <hr>
+            <button type="submit" class="btn btn-dark">Log in</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
