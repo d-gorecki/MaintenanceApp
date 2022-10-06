@@ -44,6 +44,7 @@
                     <td>{{ machine.producer }}</td>
                     <td>{{ machine.purchase_data }}</td>
                     <td><p class="machine-{{ machine.machine_status }}">{{ machine.machine_status }}</p></td>
+                    <td><a href="{% url 'malfunctions_reports_add' %}?machine={{ machine.pk }}">Report</a></td>
                 </tr>
             {% endfor %}
             </tbody>

@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .models import MalfunctionReport, MalfunctionPending
 from .forms import ReportForm
 from users.models import User
+from machines.models import Machine
+
 
 # TODO typing, docstring
 
@@ -14,7 +16,11 @@ def malfunctions_pending(request):
 
 
 def malfunctions_reports_add(request):
-    form = ReportForm()
+    machine = request.GET.get("machine")
+    if machine:
+        form = ReportForm(initial={"machine": machine})
+    else:
+        form = ReportForm()
 
     if request.method == "POST":
         form = ReportForm(request.POST, request.FILES)
