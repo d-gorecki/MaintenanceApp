@@ -18,9 +18,9 @@ def malfunctions_pending(request):
 def malfunctions_reports_add(request):
     machine = request.GET.get("machine")
     if machine:
-        form = ReportForm(initial={"machine": machine})
+        form = ReportForm(initial={"machine": machine}, user=request.user)
     else:
-        form = ReportForm()
+        form = ReportForm(user=request.user)
 
     if request.method == "POST":
         form = ReportForm(request.POST, request.FILES)
