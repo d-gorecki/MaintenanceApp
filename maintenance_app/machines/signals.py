@@ -6,6 +6,6 @@ from .models import Machine
 
 @receiver(post_save, sender=MalfunctionReport)
 def change_machine_status(sender, created, instance, **kwargs):
-    machine = Machine.objects.get(pk=instance.machine.pk)
+    machine = Machine.objects.get(id=instance.machine_id)
     machine.machine_status = "nonwork"
     machine.save()

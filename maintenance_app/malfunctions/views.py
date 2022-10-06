@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from .models import MalfunctionReport, MalfunctionPending
 from .forms import ReportForm
 from users.models import User
@@ -23,16 +23,14 @@ def malfunctions_reports_add(request):
         form = ReportForm(user=request.user)
 
     if request.method == "POST":
-        form = ReportForm(request.POST, request.FILES)
+        form = ReportForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
-            malfunction_report = MalfunctionReport(
-                machine=form.cleaned_data.get("machine"),
-                user=request.user,
-                description=form.cleaned_data.get("description"),
-                image=form.cleaned_data.get("image"),
-            )
-            malfunction_report.save()
+            report = form.save(commit=False)
+            report.user = request.user
+            report.save()
             return redirect("/malfunctions/pending")
+        else:
+            return HttpResponse(f"<h1>{form.errors}</h1>")
 
     context = {"form": form}
 

@@ -15,7 +15,7 @@ class ReportForm(forms.ModelForm):
 
     class Meta:
         model = MalfunctionReport
-        fields = "__all__"
+        fields = ("machine", "description", "image")
         widgets = {
             "machine": forms.Select(attrs={"class": "form-select"}),
             "description": forms.Textarea(
