@@ -1,215 +1,308 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Maintenance app">
-        <meta name="author" content="Dawid Górecki">
-        <title>MaintenanceApp</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="{% static 'maintenance/base.css' %}" rel="stylesheet">
-        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    </head>
-    <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="#">MaintenanceApp</a>
-            <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form> -->
-            <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="#">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
-                            </a>
-                            <!-- <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="{% url 'machines_comparison' %}" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Park maszynowy
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Static Navigation</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="{% url 'malfunctions_pending' %}" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Awarie w toku
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a> -->
-
-                            <!-- Use potentialy as left navbar drop-down menu later -->
-
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Authentication
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="login.html">Login</a>
-                                            <a class="nav-link" href="register.html">Register</a>
-                                            <a class="nav-link" href="password.html">Forgot Password</a>
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Error
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="401.html">401 Page</a>
-                                            <a class="nav-link" href="404.html">404 Page</a>
-                                            <a class="nav-link" href="500.html">500 Page</a>
-                                        </nav>
-                                    </div>
-                                </nav>
-                            </div>
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="{% url 'machines_comparison' %}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Park maszynowy
-                            </a>
-                            <a class="nav-link" href="{% url 'malfunctions_pending' %}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Awarie w toku
-                            </a>
-                            <a class="nav-link" href="{% url 'malfunctions_report' %}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Zgłoś awarię
-                            </a>
-
-                            <div class="sb-sidenav-menu-heading">Maintenance</div>
-                            <a class="nav-link" href="{% url 'maintenance_schemes' %}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Overwiew
-                            </a>
-                            <a class="nav-link" href="{% url 'maintenance_schemes_add' %}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Add new scheme
-                            </a>
-
-                        </div>
-                    </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        #TODO
-                    </div>
-                </nav>
-            </div>
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                        {% block content %}
-                        {% endblock %}
-
-                        <!--
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Primary Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Warning Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Success Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Danger Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        -->
-                        <!-- ^^ potentially use later as grid cards -->
-
-                        <!--
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        Area Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        Bar Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                        </div>
-                        -->
-                    </div>
-                </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; MaintenanceApp 2022</div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="Maintenance app" name="description">
+    <meta content="Dawid Górecki" name="author">
+    <title>MaintenanceApp</title>
+    <link href="path/to/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet"/>
+    <link href="{% static 'maintenance/base.css' %}" rel="stylesheet">
+    <script crossorigin="anonymous" src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"></script>
+</head>
+<body class="sb-nav-fixed">
+{% if user.is_authenticated %}
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="#">MaintenanceApp</a>
+    <!-- Sidebar Toggle-->
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" href="#!" id="sidebarToggle"><i
+            class="fas fa-bars"></i></button>
+    <!-- Navbar Search
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="{% static 'base.js' %}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    </body>
+    </form> -->
+    <!-- Navbar-->
+    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <li class="nav-item dropdown">
+            <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown"
+               role="button"><i class="fas fa-user fa-fw"></i></a>
+            <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="{% url 'users_profile' %}">Profile</a></li>
+                <li>
+                    <hr class="dropdown-divider"/>
+                </li>
+                <li><a class="dropdown-item" href="{% url 'users_logout' %}">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+
+
+                    <!-- <div class="sb-sidenav-menu-heading">Interface</div>
+                    <a class="nav-link collapsed" href="{% url 'machines_comparison' %}" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Park maszynowy
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="layout-static.html">Static Navigation</a>
+                            <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="{% url 'malfunctions_pending' %}" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Awarie w toku
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a> -->
+
+                    <!-- Use potentialy as left navbar drop-down menu later -->
+
+                    <div aria-labelledby="headingTwo" class="collapse" data-bs-parent="#sidenavAccordion"
+                         id="collapsePages">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a aria-controls="pagesCollapseAuth" aria-expanded="false" class="nav-link collapsed"
+                               data-bs-target="#pagesCollapseAuth" data-bs-toggle="collapse"
+                               href="#">
+                                Authentication
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div aria-labelledby="headingOne" class="collapse" data-bs-parent="#sidenavAccordionPages"
+                                 id="pagesCollapseAuth">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="login.html">Login</a>
+                                    <a class="nav-link" href="register.html">Register</a>
+                                    <a class="nav-link" href="password.html">Forgot Password</a>
+                                </nav>
+                            </div>
+                            <a aria-controls="pagesCollapseError" aria-expanded="false" class="nav-link collapsed"
+                               data-bs-target="#pagesCollapseError" data-bs-toggle="collapse"
+                               href="#">
+                                Error
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div aria-labelledby="headingOne" class="collapse" data-bs-parent="#sidenavAccordionPages"
+                                 id="pagesCollapseError">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="401.html">401 Page</a>
+                                    <a class="nav-link" href="404.html">404 Page</a>
+                                    <a class="nav-link" href="500.html">500 Page</a>
+                                </nav>
+                            </div>
+                        </nav>
+                    </div>
+                    {% if user.group == "manager" or user.is_superuser %}
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" href="#">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard
+                    </a>
+                    <div class="sb-sidenav-menu-heading">Users</div>
+                    <a class="nav-link" href="{% url 'users_add' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        Add user
+                    </a>
+
+                    <div class="sb-sidenav-menu-heading">Machine park</div>
+                    <a class="nav-link" href="{% url 'machines_comparison' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        Machines
+                    </a>
+
+                    <div class="sb-sidenav-menu-heading">Malfunctions</div>
+                    <a class="nav-link" href="{% url 'malfunctions_pending' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Pending
+                    </a>
+                    <a class="nav-link" href="{% url 'malfunctions_reports' %}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                        Malfunction reports
+                    </a>
+                    <a class="nav-link" href="{% url 'malfunctions_reports_add' %}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                        Report malfunction
+                    </a>
+
+                    <div class="sb-sidenav-menu-heading">Maintenance schemes</div>
+                    <a class="nav-link" href="{% url 'maintenance_schemes' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Overwiew
+                    </a>
+                    <a class="nav-link" href="{% url 'maintenance_schemes_add' %}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                        Add new scheme
+                    </a>
+
+                    <div class="sb-sidenav-menu-heading">Maintenance schedules</div>
+                    <a class="nav-link" href="{% url 'maintenance_schedules' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Overwiew
+                    </a>
+                    <a class="nav-link" href="{% url 'maintenance_schedules_add' %}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                        Add new schedule
+                    </a>
+                    <a class="nav-link" href="{% url 'maintenance_reports' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Reports
+                    </a>
+                    <a class="nav-link" href="{% url 'maintenance_reports_add' %}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                        Add report
+                    </a>
+                    {% endif %}
+
+                    {% if user.group == "maintenance" %}
+                    <div class="sb-sidenav-menu-heading">Malfunctions</div>
+                    <a class="nav-link" href="{% url 'malfunctions_pending' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Pending</a>
+                    <a class="nav-link" href="{% url 'malfunctions_reports' %}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                        Malfunction reports</a>
+
+
+                    <div class="sb-sidenav-menu-heading">Maintenance schemes</div>
+                    <a class="nav-link" href="{% url 'maintenance_schemes' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Overwiew</a>
+
+
+                    <div class="sb-sidenav-menu-heading">Maintenance schedules</div>
+                    <a class="nav-link" href="{% url 'maintenance_schedules' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Overwiew</a>
+
+                    <a class="nav-link" href="{% url 'maintenance_reports_add' %}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                        Add report</a>
+                    {% endif %}
+
+                    {% if user.group == "production" %}
+                    <div class="sb-sidenav-menu-heading">Machine park</div>
+                    <a class="nav-link" href="{% url 'machines_comparison' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        Machines</a>
+
+                    <div class="sb-sidenav-menu-heading">Malfunctions</div>
+                    <a class="nav-link" href="{% url 'malfunctions_reports_add' %}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                        Report malfunction</a>
+
+                    <div class="sb-sidenav-menu-heading">Maintenance schedules</div>
+                    <a class="nav-link" href="{% url 'maintenance_schedules' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Overwiew</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                <a href="{% url 'users_profile' %}">{{ user.username }}</a>&nbsp;|&nbsp;<a
+                    href="{% url 'users_logout' %}">Logout</a>
+            </div>
+            {% endif %}
+
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <br>
+                {% block content %}
+                {% endblock %}
+
+                <!--
+                <div class="row">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-primary text-white mb-4">
+                            <div class="card-body">Primary Card</div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="#">View Details</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-warning text-white mb-4">
+                            <div class="card-body">Warning Card</div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="#">View Details</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-success text-white mb-4">
+                            <div class="card-body">Success Card</div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="#">View Details</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-danger text-white mb-4">
+                            <div class="card-body">Danger Card</div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="#">View Details</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                -->
+                <!-- ^^ potentially use later as grid cards -->
+
+                <!--
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-chart-area me-1"></i>
+                                Area Chart Example
+                            </div>
+                            <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-chart-bar me-1"></i>
+                                Bar Chart Example
+                            </div>
+                            <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+                -->
+            </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; MaintenanceApp 2022</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<script crossorigin="anonymous"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'base.js' %}"></script>
+<script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+</body>
 </html>

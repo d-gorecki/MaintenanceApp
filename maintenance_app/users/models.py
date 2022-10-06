@@ -13,7 +13,11 @@ class User(AbstractUser):
         ("production_worker", "production worker"),
     )
 
-    GROUP = (("report", "report"), ("view", "view"), ("manage", "manage"))
+    GROUP = (
+        ("manager", "manager"),
+        ("maintenance", "maintenance"),
+        ("production", "production"),
+    )
 
     first_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=70, blank=True)
@@ -24,3 +28,12 @@ class User(AbstractUser):
     email = models.EmailField(blank=True)
     function = models.CharField(max_length=50, choices=FUNCTION, blank=True)
     mobile = models.CharField(max_length=12, blank=True)
+
+    def is_manager(self):
+        return self.group.filter(name="manager").exists()
+
+    def is_maintenance(self):
+        return self.group.filter(name="maintenance").exists()
+
+    def is_production(self):
+        return self.group.filter(name="production").exists()

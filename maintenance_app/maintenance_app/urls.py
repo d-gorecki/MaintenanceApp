@@ -16,12 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from machines import views as machines_views
+from users import views as users_views
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 urlpatterns = [
-    path("", machines_views.machines_comparison),
+    path("", users_views.users_profile),
     path("admin/", admin.site.urls),
     path("machines/", include("machines.urls")),
     path("malfunctions/", include("malfunctions.urls")),
     path("maintenance/", include("maintenance.urls")),
-]
+    path("users/", include("users.urls")),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
