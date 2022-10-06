@@ -3,6 +3,8 @@ from .models import MalfunctionReport, MalfunctionPending
 from .forms import ReportForm
 from users.models import User
 
+# TODO typing, docstring
+
 
 def malfunctions_pending(request):
     malfunctions = MalfunctionPending.objects.all()
@@ -13,7 +15,6 @@ def malfunctions_pending(request):
 
 def malfunctions_reports_add(request):
     form = ReportForm()
-    user = User.objects.first()  # TODO: pass logged user
 
     if request.method == "POST":
         form = ReportForm(request.POST, request.FILES)

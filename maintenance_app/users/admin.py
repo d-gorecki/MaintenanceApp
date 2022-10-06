@@ -4,7 +4,19 @@ from .models import User
 
 
 class CustomUserAdmin(UserAdmin):
-    fieldsets = UserAdmin.fieldsets
+    fieldsets = UserAdmin.fieldsets + (
+        (
+            "Additional info",
+            {
+                "fields": (
+                    "department",
+                    "group",
+                    "function",
+                    "mobile",
+                )
+            },
+        ),
+    )
     add_fieldsets = UserAdmin.add_fieldsets + (
         (
             None,

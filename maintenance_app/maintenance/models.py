@@ -49,7 +49,7 @@ class MaintenanceReport(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-
+        # TODO Refactor to use django signal instaed of override .save() method
         img = Image.open(self.image.path)
 
         if img.height > 800 or img.width > 800:

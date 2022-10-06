@@ -4,6 +4,8 @@ from .models import MaintenanceType, MaintenanceSchedule, MaintenanceReport
 from .forms import MaintenanceTypeForm, MaintenanceScheduleForm, MaintenanceReportForm
 from users.models import User
 
+# TODO CLASS BASED VIEW -> INSTEAD OF SIMPLES FUNCTIONS?METHODS, DIFFERENT FILES, PACKAGE OF VIEWS CLASSES.
+
 
 def maintenance_schemes(request):
     schemes = MaintenanceType.objects.all().order_by("pk")
