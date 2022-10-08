@@ -67,7 +67,12 @@ def maintenance_schemes_edit(
 
 
 def maintenance_schedules(request):
-    schedules = MaintenanceSchedule.objects.all()
+    if request.user.group == "production":
+        schedules = MaintenanceSchedule.objects.filter(
+            machine__department=request.user.department
+        )
+    else:
+        schedules = MaintenanceSchedule.objects.all()
     context = {"schedules": schedules}
 
     return render(request, "maintenance/maintenance_schedules.html", context)

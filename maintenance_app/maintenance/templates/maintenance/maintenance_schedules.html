@@ -35,7 +35,9 @@
                     <td>{{ schedule.machine.name }}</td>
                     <td>{{ schedule.planned_date }}</td>
                     <td>{{ schedule.user }}</td>
+                    {% if user.is_superuser or user.group == 'manager' %}
                     <td><a href="{% url 'maintenance_schedules_edit' schedule.pk %}" class="button">Edit</a></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>

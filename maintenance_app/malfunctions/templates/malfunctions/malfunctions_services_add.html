@@ -1,0 +1,24 @@
+{% extends 'maintenance/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2>Add service report</h2>
+<hr>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <h5>Select malfunction report:</h5>
+        {{ form.malfunction_report }}
+    </div>
+    <div class="form-group">
+        <h5>Add description:</h5>
+        {{ form.description }}
+    </div>
+    <div class="form-group">
+        <h5>Attach image:</h5>
+        {{ form.image }}
+    </div>
+    <hr>
+    <button type="submit" class="btn btn-dark">Submit</button>
+</form>
+
+{% endblock %}
