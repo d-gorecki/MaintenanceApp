@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.urls import path
-from .views import machines_comparison
+from . import views
 
 
 urlpatterns = [
-    path("", machines_comparison, name="machines_comparison"),
+    path("", views.machines_comparison, name="machines_comparison"),
+    path("dashboard/", views.dashboard, name="dashboard"),
 ]

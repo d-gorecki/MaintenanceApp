@@ -30,7 +30,12 @@ class MalfunctionPending(models.Model):
 
 
 class ServiceReport(models.Model):
-    malfunction_report = models.OneToOneField(
+    STATUS = (
+        ("pending", "pending"),
+        ("finished", "finished"),
+    )
+
+    malfunction_report = models.ForeignKey(
         MalfunctionReport, on_delete=models.SET_DEFAULT, default=0
     )
     user = models.ForeignKey(
@@ -39,3 +44,22 @@ class ServiceReport(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
     description = models.TextField()
     image = models.ImageField(upload_to="media/service_reports", blank=True)
+    service = models.CharField(max_length=8, choices=STATUS, default="pending")
+
+    def save(self, *args, **kwargs):
+        super(ServiceReport, self).save(*args, **kwargs)
+
+        if self.service == "finished":
+            malfunction_report = MalfunctionReport.objects.get(
+                pk=self.malfunction_report.pk
+            )
+            malfunction_report.status = "finished"
+            malfunction_report.save()
+
+        machine = MalfunctionReport.objects.get(pk=self.malfunction_report.pk).machine
+        malfunction_report = MalfunctionReport.objects.filter(
+            machine=machine, status="pending"
+        )
+        if not malfunction_report:
+            machine.machine_status = "available"
+            machine.save()

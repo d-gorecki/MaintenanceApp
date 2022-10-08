@@ -169,8 +169,20 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Pending</a>
                     <a class="nav-link" href="{% url 'malfunctions_reports' %}">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Malfunction reports</a>
+                    <a class="nav-link" href="{% url 'malfunctions_reports_add' %}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                        Report malfunction
+                    </a>
+
+                    <div class="sb-sidenav-menu-heading">Services</div>
+                    <a class="nav-link" href="{% url 'malfunctions_services_add' %}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                        Report service</a>
+                    <a class="nav-link" href="{% url 'malfunctions_services' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Service history</a>
 
 
                     <div class="sb-sidenav-menu-heading">Maintenance schemes</div>

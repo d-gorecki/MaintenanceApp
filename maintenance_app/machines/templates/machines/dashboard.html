@@ -1,0 +1,48 @@
+{% extends 'maintenance/base.html' %}
+{% block content %}
+<h2>Dashboard</h2>
+<hr>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table me-1"></i>Machine status</div>
+        <div class="card-body">
+          {% autoescape off %}
+            {{ plot_div }}
+          {% endautoescape %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table me-1"></i>Latest malfunction reports</div>
+        <div class="card-body">
+          Some info
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table me-1"></i>Latest service reports</div>
+        <div class="card-body">
+          Some info
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table me-1"></i>Latest maintenance reports</div>
+        <div class="card-body">
+          Some info
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

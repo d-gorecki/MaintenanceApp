@@ -66,7 +66,11 @@ def malfunctions_services_detail(request, pk):
 
 
 def malfunctions_services_add(request):
-    form = ServiceReportForm()
+    malfunction = request.GET.get("malfunction")
+    if malfunction:
+        form = ServiceReportForm(initial={"malfunction_report": malfunction})
+    else:
+        form = ServiceReportForm()
 
     if request.method == "POST":
         form = ServiceReportForm(request.POST, request.FILES)
