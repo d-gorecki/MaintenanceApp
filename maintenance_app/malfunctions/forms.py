@@ -28,11 +28,17 @@ class ReportForm(forms.ModelForm):
 
 
 class ServiceReportForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ServiceReportForm, self).__init__(*args, **kwargs)
+        self.fields["malfunction_report"].queryset = MalfunctionReport.objects.filter(
+            status="pending"
+        )
+
     image = forms.ImageField(required=False)
 
     class Meta:
         model = ServiceReport
-        fields = ("malfunction_report", "description", "image")
+        fields = ("malfunction_report", "description", "image", "service")
         widgets = {
             "description": forms.Textarea(
                 attrs={
@@ -41,4 +47,5 @@ class ServiceReportForm(forms.ModelForm):
                 }
             ),
             "malfunction_report": forms.Select(attrs={"class": "form-select"}),
+            "service": forms.Select(attrs={"class": "form-select"}),
         }
