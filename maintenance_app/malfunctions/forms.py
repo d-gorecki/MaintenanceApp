@@ -1,6 +1,6 @@
 from django import forms
 from machines.models import Machine
-from .models import MalfunctionReport
+from .models import MalfunctionReport, ServiceReport
 
 
 class ReportForm(forms.ModelForm):
@@ -24,4 +24,21 @@ class ReportForm(forms.ModelForm):
                     "placeholder": "Malfunction description",
                 }
             ),
+        }
+
+
+class ServiceReportForm(forms.ModelForm):
+    image = forms.ImageField(required=False)
+
+    class Meta:
+        model = ServiceReport
+        fields = ("malfunction_report", "description", "image")
+        widgets = {
+            "description": forms.Textarea(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Malfunction description",
+                }
+            ),
+            "malfunction_report": forms.Select(attrs={"class": "form-select"}),
         }

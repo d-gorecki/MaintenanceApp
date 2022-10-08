@@ -11714,6 +11714,16 @@ body {
   color: orange;
   display: inline;
 
+.report-finished {
+  color: green;
+  display: inline;
+}
+
+.report-pending {
+  color: orange;
+  display: inline;
+}
+
 
 h2 {
  margin: 20px;

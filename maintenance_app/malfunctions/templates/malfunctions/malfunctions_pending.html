@@ -38,9 +38,10 @@
                     <td>{{ malfunction.machine.factory_number }}</td>
                     <td>{{ malfunction.machine.name }}</td>
                     <td>{{ malfunction.machine.department.name }}</td>
-                    <td>{{ malfunction.malfunction_report.user }}</td>
-                    <td>{{ malfunction.malfunction_report.datetime }}</td>
+                    <td>{{ malfunction.user }}</td>
+                    <td>{{ malfunction.datetime }}</td>
                     <td>{{ malfunction.malfunction_report.description }}</td>
+                    <td>View raport</td>
                 </tr>
             {% endfor %}
             </tbody>
