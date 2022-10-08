@@ -1,0 +1,139 @@
+{% extends 'maintenance/base.html' %}
+{% block content %}
+<h2>Dashboard</h2>
+<hr>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table me-1"></i>Machine status</div>
+        <div class="card-body">
+          {% autoescape off %}
+            {{ plot_div }}
+          {% endautoescape %}
+        </div>
+        <div class="card-footer"><a href="{% url 'machines_comparison' %}">See details..</a></div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table me-1"></i>Latest malfunction reports</div>
+        <div class="card-body">
+            <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Machine</th>
+                    <th>User</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Machine</th>
+                    <th>User</th>
+                    <th>Description</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            {% for report in malfunctions_reports %}
+                <tr>
+                    <td>{{ report.pk }}</td>
+                    <td>{{ report.machine }}</td>
+                    <td>{{ report.user }}</td>
+                    <td><a href="{% url 'malfunctions_reports_detail' report.pk %}">{{ report.description|slice:"20" }}...</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        <div class="card-footer"><a href="{% url 'malfunctions_reports' %}">See all reports..</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table me-1"></i>Latest service reports</div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Machine</th>
+                    <th>Malfunction report</th>
+                    <th>Serviceman</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Machine</th>
+                    <th>Malfunction report</th>
+                    <th>Serviceman</th>
+                    <th>Description</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            {% for service in malfunctions_services %}
+                <tr>
+                    <td>{{ service.pk }}</td>
+                    <td>{{ service.malfunction_report.machine }}</td>
+                    <td><a href="{% url 'malfunctions_reports_detail' service.malfunction_report.pk %}">{{ service.malfunction_report }}</a></td>
+                    <td>{{ service.user }}</td>
+                    <td><a href="{% url 'malfunctions_services_detail' service.pk %}">{{ service.description|slice:"20" }}...</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        <div class="card-footer"><a href="{% url 'malfunctions_services' %}">See all reports..</a></div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table me-1"></i>Latest maintenance reports</div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>User</th>
+                    <th>Schedule</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>User</th>
+                    <th>Schedule</th>
+                    <th>Description</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            {% for report in maintenance_reports %}
+                <tr>
+                    <td>{{ report.pk }}</td>
+                    <td>{{ report.date }}</td>
+                    <td>{{ report.user }}</td>
+                    <td>{{ report.schedule }}</td>
+                    <td><a href="{% url 'maintenance_reports_detail' report.pk %}">{{ report.description|slice:"20" }}...</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        <div class="card-footer"><a href="{% url 'maintenance_reports' %}">See all reports..</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

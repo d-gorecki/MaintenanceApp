@@ -5,5 +5,4 @@ from . import views
 
 urlpatterns = [
     path("", views.machines_comparison, name="machines_comparison"),
-    path("dashboard/", views.dashboard, name="dashboard"),
 ]
