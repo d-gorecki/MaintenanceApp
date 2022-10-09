@@ -5,18 +5,18 @@
 <div class="card mb-4">
     <div class="card-header">
         <i class="fas fa-table me-1"></i>
-        Maintenance report for {{ report.schedule }}
+        Maintenance report for {{ object.schedule }}
     </div>
     <div class="card-body">
-        <div><strong>Employee: </strong>{{ report.user }}</div>
+        <div><strong>Employee: </strong>{{ object.user }}</div>
         <hr>
-        <div><strong>Date: </strong>{{ report.date }}</div>
+        <div><strong>Date: </strong>{{ object.date }}</div>
         <hr>
         <div><strong>Description:</strong></div>
-        <div>{{ report.description }}</div>
+        <div>{{ object.description }}</div>
         <hr>
         <div><strong>Attachements:</strong></div>
-        <img src="{{ report.image.url }}">
+        <img src="{{ object.image.url }}">
     </div>
 </div>
 

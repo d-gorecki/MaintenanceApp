@@ -16,7 +16,7 @@
 {% if user.is_authenticated %}
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="#">MaintenanceApp</a>
+    <a class="navbar-brand ps-3" href="{% url 'machines' %}">MaintenanceApp</a>
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" href="#!" id="sidebarToggle"><i
             class="fas fa-bars"></i></button>
@@ -50,7 +50,7 @@
 
 
                     <!-- <div class="sb-sidenav-menu-heading">Interface</div>
-                    <a class="nav-link collapsed" href="{% url 'machines_comparison' %}" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                    <a class="nav-link collapsed" href="{% url 'machines' %}" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Park maszynowy
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -118,10 +118,16 @@
                         Add user
                     </a>
                     <div class="sb-sidenav-menu-heading">Machine park</div>
-                    <a class="nav-link" href="{% url 'machines_comparison' %}">
+                    <a class="nav-link" href="{% url 'machines' %}">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Machines
                     </a>
+                    <a class="nav-link" href="{% url 'machines_add' %}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                        Add new machine
+                    </a>
+
+
 
                     <div class="sb-sidenav-menu-heading">Malfunctions</div>
                     <a class="nav-link" href="{% url 'malfunctions_pending' %}">
@@ -174,6 +180,12 @@
                     {% endif %}
 
                     {% if user.group == "maintenance" %}
+                    <div class="sb-sidenav-menu-heading">Machine park</div>
+                    <a class="nav-link" href="{% url 'machines' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Machines
+                    </a>
+
                     <div class="sb-sidenav-menu-heading">Malfunctions</div>
                     <a class="nav-link" href="{% url 'malfunctions_pending' %}">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -181,9 +193,9 @@
                     <a class="nav-link" href="{% url 'malfunctions_reports' %}">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Malfunction reports</a>
-                    Report malfunction
                     <a class="nav-link" href="{% url 'malfunctions_reports_add' %}">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
+                        Report malfunction
                     </a>
 
                     <div class="sb-sidenav-menu-heading">Services</div>
@@ -213,7 +225,7 @@
 
                     {% if user.group == "production" %}
                     <div class="sb-sidenav-menu-heading">Machine park</div>
-                    <a class="nav-link" href="{% url 'machines_comparison' %}">
+                    <a class="nav-link" href="{% url 'machines' %}">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-plus"></i></div>
                         Machines</a>
 

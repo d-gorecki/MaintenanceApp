@@ -1,51 +1,81 @@
 from django.urls import path, include
-from . import views
-
+from .views import (
+    maintenance_schemes,
+    maintenance_schedules,
+    maintenance_schedules_add,
+    maintenance_schemes_add,
+    maintenance_schemes_type,
+    maintenance_schemes_group,
+    maintenance_reports_add,
+    maintenance_schemes_detail,
+    maintenance_schemes_edit,
+    maintenance_reports_detail,
+    maintenance_schedules_edit,
+    maintenance_reports,
+)
 
 urlpatterns = [
-    path("", views.maintenance_schemes, name="maintenance_schemes"),
-    path("schemes/", views.maintenance_schemes, name="maintenance_schemes"),
+    path(
+        "", maintenance_schemes.MaintenanceSchemes.as_view(), name="maintenance_schemes"
+    ),
+    path(
+        "schemes/",
+        maintenance_schemes.MaintenanceSchemes.as_view(),
+        name="maintenance_schemes",
+    ),
     path(
         "schemes/<int:pk>",
-        views.maintenance_schemes_detail,
+        maintenance_schemes_detail.MaintenanceSchemesDetail.as_view(),
         name="maintenance_schemes_detail",
     ),
     path(
         "schemes/machine_group/<int:pk>",
-        views.maintenance_schemes_group,
+        maintenance_schemes_group.MaintenanceSchemesGroup.as_view(),
         name="maintenance_schemes_group",
     ),
     path(
         "schemes/type/<slug:type>",
-        views.maintenance_schemes_type,
+        maintenance_schemes_type.MaintenanceSchemesType.as_view(),
         name="maintenance_schemes_type",
     ),
-    path("schemes/add/", views.maintenance_schemes_add, name="maintenance_schemes_add"),
+    path(
+        "schemes/add/",
+        maintenance_schemes_add.MaintenanceSchemesAdd.as_view(),
+        name="maintenance_schemes_add",
+    ),
     path(
         "schemes/edit/<int:pk>",
-        views.maintenance_schemes_edit,
+        maintenance_schemes_edit.MaintenanceSchemesEdit.as_view(),
         name="maintenance_schemes_edit",
     ),
-    path("schedules/", views.maintenance_schedules, name="maintenance_schedules"),
+    path(
+        "schedules/",
+        maintenance_schedules.MaintenanceSchedules.as_view(),
+        name="maintenance_schedules",
+    ),
     path(
         "schedules/add/",
-        views.maintenance_schedules_add,
+        maintenance_schedules_add.MaintenanceSchedulesAdd.as_view(),
         name="maintenance_schedules_add",
     ),
     path(
         "schedules/edit/<int:pk>",
-        views.maintenance_schedules_edit,
+        maintenance_schedules_edit.MaintenanceSchedulesEdit.as_view(),
         name="maintenance_schedules_edit",
     ),
-    path("schedules/reports/", views.maintenance_reports, name="maintenance_reports"),
+    path(
+        "schedules/reports/",
+        maintenance_reports.MaintenanceReports.as_view(),
+        name="maintenance_reports",
+    ),
     path(
         "schedules/reports/<int:pk>",
-        views.maintenance_reports_detail,
+        maintenance_reports_detail.MaintenanceReportsDetail.as_view(),
         name="maintenance_reports_detail",
     ),
     path(
         "schedules/reports/add",
-        views.maintenance_reports_add,
+        maintenance_reports_add.MaintenanceReportsAdd.as_view(),
         name="maintenance_reports_add",
     ),
 ]

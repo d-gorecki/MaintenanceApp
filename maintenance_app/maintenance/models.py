@@ -15,20 +15,32 @@ class MaintenanceType(models.Model):
         ("three-years", "three years maintenance"),
         ("additional", "non-standard maintenacne"),
     )
-    type = models.CharField(max_length=50, choices=MAINTENANCE_TYPES, default="week")
-    description = models.TextField()
-    machine_group = models.ForeignKey(MachineGroup, on_delete=models.CASCADE, default=0)
+    type = models.CharField(
+        max_length=50,
+        choices=MAINTENANCE_TYPES,
+        default="week",
+        help_text="Maintenance type",
+    )
+    description = models.TextField(help_text="Description")
+    machine_group = models.ForeignKey(
+        MachineGroup, on_delete=models.CASCADE, default=0, help_text="Machine group"
+    )
 
     def __str__(self):
         return f"{self.type}: {self.machine_group}"
 
 
 class MaintenanceSchedule(models.Model):
-    machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
-    maintenance_type = models.ForeignKey(MaintenanceType, on_delete=models.CASCADE)
-    planned_date = models.DateField()
+    machine = models.ForeignKey(Machine, on_delete=models.CASCADE, help_text="Machine")
+    maintenance_type = models.ForeignKey(
+        MaintenanceType, on_delete=models.CASCADE, help_text="Maintenance type"
+    )
+    planned_date = models.DateField(help_text="Maintenance planned date")
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.SET_DEFAULT, default=0
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_DEFAULT,
+        default=0,
+        help_text="Responsible",
     )
     # on user deletion app should reassign another user to planned maintenance
 
@@ -39,13 +51,21 @@ class MaintenanceSchedule(models.Model):
 class MaintenanceReport(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     schedule = models.ForeignKey(
-        MaintenanceSchedule, on_delete=models.SET_DEFAULT, default=1
+        MaintenanceSchedule,
+        on_delete=models.SET_DEFAULT,
+        default=1,
+        help_text="Corresponding maintenance schedule",
     )
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.SET_DEFAULT, default=3
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_DEFAULT,
+        default=3,
+        help_text="Serviceman",
     )
-    description = models.TextField()
-    image = models.ImageField(upload_to="media/maintenance_reports")
+    description = models.TextField(help_text="Description")
+    image = models.ImageField(
+        upload_to="media/maintenance_reports", help_text="Allowed formats (.jpg, .png)"
+    )
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
