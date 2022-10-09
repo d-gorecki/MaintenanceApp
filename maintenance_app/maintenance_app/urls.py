@@ -22,7 +22,7 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path("", machines.Machines.as_view),
+    path("", machines.Machines.as_view()),
     path("admin/", admin.site.urls),
     path("machines/", include("machines.urls")),
     path("malfunctions/", include("malfunctions.urls")),
