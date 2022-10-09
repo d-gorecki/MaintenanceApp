@@ -38,7 +38,7 @@ def malfunctions_reports_add(request):
 
 
 def malfunctions_reports(request):
-    malfunction_reports = MalfunctionReport.objects.all()
+    malfunction_reports = MalfunctionReport.objects.all().order_by("-id")
     context = {"malfunction_reports": malfunction_reports}
 
     return render(request, "malfunctions/malfunctions_reports.html", context)

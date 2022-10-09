@@ -32,7 +32,9 @@
                     <td><a href="{% url 'maintenance_schemes_type' scheme.type %}">{{ scheme.type }}</a></td>
                     <td><a href="{% url 'maintenance_schemes_group' scheme.machine_group_id %}">{{ scheme.machine_group.name }}</a></td>
                     <td><a href="{% url 'maintenance_schemes_detail' scheme.pk %}">{{ scheme.description|slice:"20" }}...</a></td>
+                    {% if user.group == "manager" or user.is_superuser %}
                     <td><a href="{% url 'maintenance_schemes_edit' scheme.pk %}" class="button">Edit</a></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>
