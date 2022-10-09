@@ -19,21 +19,20 @@ class User(AbstractUser):
         ("production", "production"),
     )
 
-    first_name = models.CharField(max_length=50, blank=True)
-    last_name = models.CharField(max_length=70, blank=True)
+    first_name = models.CharField(max_length=50, blank=True, help_text="First name")
+    last_name = models.CharField(max_length=70, blank=True, help_text="Last name")
     department = models.ForeignKey(
-        Department, on_delete=models.SET_DEFAULT, default=1, blank=True
+        Department,
+        on_delete=models.SET_DEFAULT,
+        default=1,
+        blank=True,
+        help_text="Department",
     )
-    group = models.CharField(max_length=20, choices=GROUP, blank=True)
-    email = models.EmailField(blank=True)
-    function = models.CharField(max_length=50, choices=FUNCTION, blank=True)
-    mobile = models.CharField(max_length=12, blank=True)
-
-    def is_manager(self):
-        return self.group.filter(name="manager").exists()
-
-    def is_maintenance(self):
-        return self.group.filter(name="maintenance").exists()
-
-    def is_production(self):
-        return self.group.filter(name="production").exists()
+    group = models.CharField(
+        max_length=20, choices=GROUP, blank=True, help_text="Privileges group"
+    )
+    email = models.EmailField(blank=True, help_text="Email")
+    function = models.CharField(
+        max_length=50, choices=FUNCTION, blank=True, help_text="Function"
+    )
+    mobile = models.CharField(max_length=12, blank=True, help_text="Mobile")
