@@ -1,27 +1,49 @@
 from django.urls import path
-from . import views
+from .views import (
+    malfunctions_reports,
+    malfunctions_services,
+    malfunctions_pending,
+    malfunctions_services_detail,
+    malfunctions_reports_detail,
+    malfunctions_reports_add,
+    malfunctions_services_add,
+)
 
 
 urlpatterns = [
-    path("pending/", views.malfunctions_pending, name="malfunctions_pending"),
-    path("reports/", views.malfunctions_reports, name="malfunctions_reports"),
     path(
-        "reports/add/", views.malfunctions_reports_add, name="malfunctions_reports_add"
+        "pending/",
+        malfunctions_pending.MalfunctionsPending.as_view(),
+        name="malfunctions_pending",
+    ),
+    path(
+        "reports/",
+        malfunctions_reports.MalfunctionsReports.as_view(),
+        name="malfunctions_reports",
+    ),
+    path(
+        "reports/add/",
+        malfunctions_reports_add.MalfunctionsReportsAdd.as_view(),
+        name="malfunctions_reports_add",
     ),
     path(
         "reports/<int:pk>",
-        views.malfunctions_reports_detail,
+        malfunctions_reports_detail.MalfunctionsReportsDetail.as_view(),
         name="malfunctions_reports_detail",
     ),
-    path("services/", views.malfunctions_services, name="malfunctions_services"),
+    path(
+        "services/",
+        malfunctions_services.MalfunctionsServices.as_view(),
+        name="malfunctions_services",
+    ),
     path(
         "services/<int:pk>",
-        views.malfunctions_services_detail,
+        malfunctions_services_detail.MalfunctionsServicesDetail.as_view(),
         name="malfunctions_services_detail",
     ),
     path(
         "services/add",
-        views.malfunctions_services_add,
+        malfunctions_services_add.MalfunctionServicesAdd.as_view(),
         name="malfunctions_services_add",
     ),
 ]
