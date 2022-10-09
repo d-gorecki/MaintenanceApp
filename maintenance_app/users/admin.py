@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from .models import User
 
 
+@admin.register(User)
 class CustomUserAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
         (
@@ -33,6 +34,3 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
     )
-
-
-admin.site.register(User, CustomUserAdmin)
