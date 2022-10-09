@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
-from .forms import ManagerUserCreationForm
+from .forms import ManagerUserCreationForm, UserUpdateForm
 from django.contrib import messages
 from django.shortcuts import HttpResponse
+from .models import User
 
 
 @login_required()
@@ -38,3 +39,25 @@ def users_add(request):
     context = {"form": form}
 
     return render(request, "users/users_add.html", context)
+
+
+def users(request):
+    users = User.objects.all()
+    context = {"users": users}
+
+    return render(request, "users/users.html", context)
+
+
+def users_edit(request, pk):
+    user = User.objects.get(pk=pk)
+
+    if request.method == "POST":
+        form = UserUpdateForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect("users")
+
+    form = UserUpdateForm(instance=user)
+    context = {"form": form}
+
+    return render(request, "users/users_edit.html", context)

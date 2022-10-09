@@ -1,10 +1,10 @@
 {% extends 'maintenance/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<h2>Create new user</h2>
+<h2>Edit user:</h2>
 <hr>
 <div class="card mb-4">
-    <div class="card-header"><i class="fas fa-table me-1"></i>Create new user</div>
+    <div class="card-header"><i class="fas fa-table me-1"></i>Edit user</div>
     <div class="card-body">
         <form method="post">
             {% csrf_token %}
@@ -12,8 +12,9 @@
             {{ form|crispy }}
             </div>
             <hr>
-            <button type="submit" class="btn btn-dark">Create</button>
+            <button type="submit" class="btn btn-dark">Edit</button>
         </form>
     </div>
 </div>
+
 {% endblock %}
