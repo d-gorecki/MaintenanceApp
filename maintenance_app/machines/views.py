@@ -32,5 +32,16 @@ def machines_add(request):
     return render(request, "machines/machines_add.html", context)
 
 
-def machines_edit(request):
-    pass
+def machines_edit(request, pk):
+    machine = Machine.objects.get(pk=pk)
+
+    if request.method == "POST":
+        form = MachineAddForm(request.POST, instance=machine)
+        if form.is_valid():
+            form.save()
+            return redirect("machines")
+
+    form = MachineAddForm(instance=machine)
+    context = {"form": form}
+
+    return render(request, "machines/machines_edit.html", context)

@@ -45,6 +45,9 @@
                     <td>{{ machine.purchase_data }}</td>
                     <td><p class="machine-{{ machine.machine_status }}">{{ machine.machine_status }}</p></td>
                     <td><a href="{% url 'malfunctions_reports_add' %}?machine={{ machine.pk }}">Report</a></td>
+                    {% if user.group == "manager" or user.is_superuser %}
+                    <td><a href="{% url 'machines_edit' machine.pk %}">Edit</a></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>
