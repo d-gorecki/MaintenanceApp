@@ -2,9 +2,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.views import View
 from machines.forms import MachineAddForm
+from maintenance_app.mixins import ManagerGroupTestMixin
 
 
-class MachinesAdd(LoginRequiredMixin, View):
+class MachinesAdd(LoginRequiredMixin, ManagerGroupTestMixin, View):
     form_class = MachineAddForm
     template_name = "machines/machines_add.html"
 

@@ -1,10 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.views import View
-
 from ..forms import MaintenanceReportForm
+from maintenance_app.mixins import ManagerMaintenanceGroupTestMixin
 
 
-class MaintenanceReportsAdd(View):
+class MaintenanceReportsAdd(LoginRequiredMixin, ManagerMaintenanceGroupTestMixin, View):
     form_class = MaintenanceReportForm
     template_name = "maintenance/maintenance_reports_add.html"
 

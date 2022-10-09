@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from plotly.offline import plot
 from plotly.graph_objs import Pie
@@ -5,9 +6,10 @@ from malfunctions.models import MalfunctionReport, ServiceReport
 from maintenance.models import MaintenanceReport
 from machines.models import Machine
 from django.views import View
+from maintenance_app.mixins import ManagerGroupTestMixin
 
 
-class Dashboard(View):
+class Dashboard(LoginRequiredMixin, ManagerGroupTestMixin, View):
     def get(self, request):
         labels = ["available", "nonworking"]
         values = [

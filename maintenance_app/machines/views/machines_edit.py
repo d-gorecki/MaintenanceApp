@@ -4,8 +4,10 @@ from django.views import View
 from machines.forms import MachineAddForm
 from machines.models import Machine
 
+from maintenance_app.mixins import ManagerGroupTestMixin
 
-class MachinesEdit(LoginRequiredMixin, View):
+
+class MachinesEdit(LoginRequiredMixin, ManagerGroupTestMixin, View):
     form_class = MachineAddForm
     template_name = "machines/machines_edit.html"
 

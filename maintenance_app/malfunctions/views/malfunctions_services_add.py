@@ -1,9 +1,13 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 from ..forms import ServiceReportForm
+from maintenance_app.mixins import ManagerMaintenanceGroupTestMixin
 
 
-class MalfunctionServicesAdd(View):
+class MalfunctionServicesAdd(
+    LoginRequiredMixin, ManagerMaintenanceGroupTestMixin, View
+):
     form_class = ServiceReportForm
     template_name = "malfunctions/malfunctions_services_add.html"
 

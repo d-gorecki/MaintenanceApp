@@ -1,10 +1,12 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 from ..forms import UserUpdateForm
 from ..models import User
+from maintenance_app.mixins import ManagerMaintenanceGroupTestMixin
 
 
-class UsersEdit(View):
+class UsersEdit(LoginRequiredMixin, ManagerMaintenanceGroupTestMixin, View):
     form_class = UserUpdateForm
     template_name = "users/users_edit.html"
 

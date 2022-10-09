@@ -1,10 +1,12 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 from ..forms import MaintenanceTypeForm
 from ..models import MaintenanceType
+from maintenance_app.mixins import ManagerGroupTestMixin
 
 
-class MaintenanceSchemesEdit(View):
+class MaintenanceSchemesEdit(LoginRequiredMixin, ManagerGroupTestMixin, View):
     form_class = MaintenanceTypeForm
     template_name = "maintenance/maintenance_schemes_edit.html"
 

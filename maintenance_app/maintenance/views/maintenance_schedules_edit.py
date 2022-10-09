@@ -1,10 +1,12 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 from ..forms import MaintenanceScheduleForm
 from ..models import MaintenanceSchedule
+from maintenance_app.mixins import ManagerGroupTestMixin
 
 
-class MaintenanceSchedulesEdit(View):
+class MaintenanceSchedulesEdit(LoginRequiredMixin, ManagerGroupTestMixin, View):
     template_name = "maintenance/maintenance_schedules_edit.html"
     form_class = MaintenanceScheduleForm
 
