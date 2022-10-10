@@ -7,6 +7,8 @@ from maintenance_app.mixins import ManagerMaintenanceGroupTestMixin
 class MaintenanceSchemesDetail(
     LoginRequiredMixin, ManagerMaintenanceGroupTestMixin, DetailView
 ):
-    model = MaintenanceType
-    template_name = "maintenance/maintenance_schemes_detail.html"
-    context_object_name = "scheme"
+    """Detail view for maintenance schemes (sub-module of maintenance app)"""
+
+    model: MaintenanceType = MaintenanceType
+    template_name: str = "maintenance/maintenance_schemes_detail.html"
+    context_object_name: str = "scheme"

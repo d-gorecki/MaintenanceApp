@@ -5,7 +5,7 @@ from django.conf import settings
 
 
 class MalfunctionReport(models.Model):
-    STATUS = (("pending", "pending"), ("finished", "finished"))
+    STATUS: tuple[tuple[str]] = (("pending", "pending"), ("finished", "finished"))
 
     machine = models.ForeignKey(Machine, on_delete=models.CASCADE, help_text="Machine")
     user = models.ForeignKey(
@@ -37,7 +37,7 @@ class MalfunctionPending(models.Model):
 
 
 class ServiceReport(models.Model):
-    STATUS = (
+    STATUS: tuple[tuple[str]] = (
         ("pending", "pending"),
         ("finished", "finished"),
     )
@@ -68,7 +68,11 @@ class ServiceReport(models.Model):
         help_text="Status after service",
     )
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
+        """If ServiceReport status field has been set to finished, save method sets status of corresponding
+        MalfunctionReport to finished. Then method checks if there are any other MalfunctionReport objects with pending
+        status for ServiceReport.machine. In case of empty queryset method sets ServiceReport.machine status
+        to available."""
         super(ServiceReport, self).save(*args, **kwargs)
 
         if self.service == "finished":

@@ -4,7 +4,7 @@ from departments.models import Department
 
 
 class User(AbstractUser):
-    FUNCTION = (
+    FUNCTION: tuple[tuple[str]] = (
         ("electrican", "electrican"),
         ("mechanic", "mechanic"),
         ("automation_serviceman", "automation serviceman"),
@@ -13,7 +13,7 @@ class User(AbstractUser):
         ("production_worker", "production worker"),
     )
 
-    GROUP = (
+    GROUP: tuple[tuple[str]] = (
         ("manager", "manager"),
         ("maintenance", "maintenance"),
         ("production", "production"),

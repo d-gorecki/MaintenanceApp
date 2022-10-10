@@ -1,3 +1,5 @@
+from typing import Union, Any
+
 from django import forms
 from .models import MaintenanceType, MaintenanceSchedule, MaintenanceReport
 from machines.models import MachineGroup
@@ -6,9 +8,9 @@ from django.forms import Textarea, Select, DateInput
 
 class MaintenanceTypeForm(forms.ModelForm):
     class Meta:
-        model = MaintenanceType
-        fields = ("type", "machine_group", "description")
-        widgets = {
+        model: MaintenanceType = MaintenanceType
+        fields: tuple[str] = ("type", "machine_group", "description")
+        widgets: dict[str, Union[Textarea, Select, Any]] = {
             "description": Textarea(
                 attrs={
                     "class": "form-control",
@@ -22,9 +24,9 @@ class MaintenanceTypeForm(forms.ModelForm):
 
 class MaintenanceScheduleForm(forms.ModelForm):
     class Meta:
-        model = MaintenanceSchedule
-        fields = ("machine", "maintenance_type", "planned_date", "user")
-        widgets = {
+        model: MaintenanceSchedule = MaintenanceSchedule
+        fields: tuple[str] = ("machine", "maintenance_type", "planned_date", "user")
+        widgets: dict[str, Union[Select, DateInput, Any]] = {
             "machine": Select(attrs={"class": "form-select"}),
             "maintenance_type": Select(attrs={"class": "form-select"}),
             "user": Select(attrs={"class": "form-select"}),
@@ -34,9 +36,9 @@ class MaintenanceScheduleForm(forms.ModelForm):
 
 class MaintenanceReportForm(forms.ModelForm):
     class Meta:
-        model = MaintenanceReport
-        fields = ("schedule", "description", "image")
-        widgets = {
+        model: MaintenanceReport = MaintenanceReport
+        fields: tuple[str] = ("schedule", "description", "image")
+        widgets: dict[str, Union[Select, Textarea]] = {
             "schedule": Select(attrs={"class": "form-select"}),
             "description": Textarea(attrs={"class": "form-control"}),
         }

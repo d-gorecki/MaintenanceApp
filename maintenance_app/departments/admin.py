@@ -3,9 +3,9 @@ from .models import Department
 
 
 class AdminDepartment(admin.ModelAdmin):
-    list_display = ("id", "name")
-    search_fields = ("name",)
-    search_help_text = "name"
+    list_display: tuple[str, str] = ("id", "name")
+    search_fields: tuple[str] = ("name",)
+    search_help_text: str = "name"
 
 
 admin.site.register(Department, AdminDepartment)

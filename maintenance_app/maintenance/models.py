@@ -6,7 +6,7 @@ from PIL import Image
 
 # TODO help_text
 class MaintenanceType(models.Model):
-    MAINTENANCE_TYPES = (
+    MAINTENANCE_TYPES: tuple[tuple[str]] = (
         ("week", "weekly maintenance"),
         ("month", "monthly maintenance"),
         ("half year", "half year maintenance"),
@@ -67,12 +67,12 @@ class MaintenanceReport(models.Model):
         upload_to="media/maintenance_reports", help_text="Allowed formats (.jpg, .png)"
     )
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
+        """Resize passed images with resolution higher than 800x800 before saving to database"""
         super().save(*args, **kwargs)
-        # TODO Refactor to use django signal instaed of override .save() method
-        img = Image.open(self.image.path)
+        img: Image = Image.open(self.image.path)
 
         if img.height > 800 or img.width > 800:
-            output_size = (800, 800)
+            output_size: tuple[int] = (800, 800)
             img.thumbnail(output_size)
             img.save(self.image.path)

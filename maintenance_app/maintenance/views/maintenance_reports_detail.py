@@ -7,5 +7,7 @@ from maintenance_app.mixins import ManagerMaintenanceGroupTestMixin
 class MaintenanceReportsDetail(
     LoginRequiredMixin, ManagerMaintenanceGroupTestMixin, DetailView
 ):
-    model = MaintenanceReport
-    template_name = "maintenance/maintenance_reports_detail.html"
+    """Detail view for maintenance reports (sub-module of maintenance app)"""
+
+    model: MaintenanceReport = MaintenanceReport
+    template_name: str = "maintenance/maintenance_reports_detail.html"

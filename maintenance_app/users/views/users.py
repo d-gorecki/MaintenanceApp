@@ -5,6 +5,8 @@ from maintenance_app.mixins import ManagerGroupTestMixin
 
 
 class Users(LoginRequiredMixin, ManagerGroupTestMixin, ListView):
-    model = User
-    context_object_name = "users"
-    template_name = "users/users.html"
+    """Main(list) view for users app"""
+
+    model: User = User
+    context_object_name: str = "users"
+    template_name: str = "users/users.html"

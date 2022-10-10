@@ -1,3 +1,5 @@
+from typing import Callable
+
 from django.urls import path, include
 from .views import (
     maintenance_schemes,
@@ -14,7 +16,7 @@ from .views import (
     maintenance_reports,
 )
 
-urlpatterns = [
+urlpatterns: list[Callable] = [
     path(
         "", maintenance_schemes.MaintenanceSchemes.as_view(), name="maintenance_schemes"
     ),

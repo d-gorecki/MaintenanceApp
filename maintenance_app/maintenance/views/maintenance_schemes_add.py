@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, redirect
 from django.views import View
 from ..forms import MaintenanceTypeForm
@@ -6,14 +7,16 @@ from maintenance_app.mixins import ManagerGroupTestMixin
 
 
 class MaintenanceSchemesAdd(LoginRequiredMixin, ManagerGroupTestMixin, View):
-    form_class = MaintenanceTypeForm
-    template_name = "maintenance/maintenance_schemes_add.html"
+    """Create view for maintenance schemes (sub-module of maintenance app)"""
 
-    def get(self, request):
+    form_class: MaintenanceTypeForm = MaintenanceTypeForm
+    template_name: str = "maintenance/maintenance_schemes_add.html"
+
+    def get(self, request: HttpRequest) -> HttpResponse:
         return render(request, self.template_name, {"form": self.form_class()})
 
-    def post(self, request):
-        form = self.form_class(request.POST)
+    def post(self, request: HttpRequest) -> HttpResponse:
+        form: MaintenanceTypeForm = self.form_class(request.POST)
         if form.is_valid():
             form.save()
             return redirect("/maintenance/")
