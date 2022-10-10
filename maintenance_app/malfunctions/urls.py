@@ -1,3 +1,5 @@
+from typing import Callable
+
 from django.urls import path
 from .views import (
     malfunctions_reports,
@@ -10,7 +12,7 @@ from .views import (
 )
 
 
-urlpatterns = [
+urlpatterns: list[Callable] = [
     path(
         "pending/",
         malfunctions_pending.MalfunctionsPending.as_view(),

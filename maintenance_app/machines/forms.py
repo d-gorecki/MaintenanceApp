@@ -1,3 +1,5 @@
+from typing import Union
+
 from django import forms
 from django.forms import Select, DateInput, TextInput
 
@@ -6,10 +8,10 @@ from .models import Machine
 
 class MachineAddForm(forms.ModelForm):
     class Meta:
-        model = Machine
-        fields = "__all__"
+        model: Machine = Machine
+        fields: str = "__all__"
 
-        widgets = {
+        widgets: dict[str, Union[TextInput, Select]] = {
             "factory_number": TextInput(attrs={"class": "form-control"}),
             "producer": TextInput(attrs={"class": "form-control"}),
             "machine_group": Select(attrs={"class": "form-select"}),

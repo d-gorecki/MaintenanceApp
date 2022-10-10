@@ -5,8 +5,8 @@ from django import forms
 
 class ManagerUserCreationForm(UserCreationForm):
     class Meta:
-        model = User
-        fields = (
+        model: User = User
+        fields: tuple[str] = (
             "username",
             "password1",
             "password2",
@@ -22,8 +22,8 @@ class ManagerUserCreationForm(UserCreationForm):
 
 class UserUpdateForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = (
+        model: User = User
+        fields: tuple[str] = (
             "username",
             "group",
             "first_name",

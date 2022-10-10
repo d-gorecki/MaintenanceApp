@@ -3,22 +3,22 @@ from .models import MaintenanceType, MaintenanceSchedule, MaintenanceReport
 
 
 class AdminMaintenanceReport(admin.ModelAdmin):
-    list_display = ("id", "user", "schedule")
-    search_fields = ("user",)
-    search_help_text = "user"
+    list_display: tuple[str] = ("id", "user", "schedule")
+    search_fields: tuple[str] = ("user",)
+    search_help_text: str = "user"
 
 
 @admin.register(MaintenanceSchedule)
 class AdminMaintenanceSchedule(admin.ModelAdmin):
-    list_display = ("machine", "maintenance_type", "planned_date", "user")
-    search_fields = ("machine",)
-    search_help_text = "machine"
+    list_display: tuple[str] = ("machine", "maintenance_type", "planned_date", "user")
+    search_fields: tuple[str] = ("machine",)
+    search_help_text: str = "machine"
 
 
 class AdminMaintenanceType(admin.ModelAdmin):
-    list_display = ("type", "description", "machine_group")
-    search_fields = ("type",)
-    search_help_text = "maintenance type"
+    list_display: tuple[str] = ("type", "description", "machine_group")
+    search_fields: tuple[str] = ("type",)
+    search_help_text: str = "maintenance type"
 
 
 admin.site.register(MaintenanceType, AdminMaintenanceType)

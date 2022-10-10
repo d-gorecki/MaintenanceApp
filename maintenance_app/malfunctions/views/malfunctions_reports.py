@@ -7,7 +7,9 @@ from maintenance_app.mixins import ManagerMaintenanceGroupTestMixin
 class MalfunctionsReports(
     LoginRequiredMixin, ManagerMaintenanceGroupTestMixin, ListView
 ):
-    model = MalfunctionReport
-    template_name = "malfunctions/malfunctions_reports.html"
-    ordering = ["-id"]
-    context_object_name = "malfunction_reports"
+    """Base view for malfunctions reports (sub-module of malfunctions app)"""
+
+    model: MalfunctionReport = MalfunctionReport
+    template_name: str = "malfunctions/malfunctions_reports.html"
+    ordering: list[str] = ["-id"]
+    context_object_name: str = "malfunction_reports"

@@ -1,10 +1,14 @@
+from typing import Any, Union
+
 from django import forms
+from django.forms import Select, Textarea
 from machines.models import Machine
 from .models import MalfunctionReport, ServiceReport
+from users.models import User
 
 
 class ReportForm(forms.ModelForm):
-    def __init__(self, *args, user=None, **kwargs):
+    def __init__(self, *args, user: User = None, **kwargs) -> None:
         super(ReportForm, self).__init__(*args, **kwargs)
         if user.group == "production":
             self.fields["machine"].queryset = Machine.objects.filter(
@@ -14,9 +18,9 @@ class ReportForm(forms.ModelForm):
     image = forms.ImageField(required=False)
 
     class Meta:
-        model = MalfunctionReport
-        fields = ("machine", "description", "image")
-        widgets = {
+        model: MalfunctionReport = MalfunctionReport
+        fields: tuple[str] = ("machine", "description", "image")
+        widgets: dict[str, Union[Select, Textarea, Any]] = {
             "machine": forms.Select(attrs={"class": "form-select"}),
             "description": forms.Textarea(
                 attrs={
@@ -28,7 +32,7 @@ class ReportForm(forms.ModelForm):
 
 
 class ServiceReportForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super(ServiceReportForm, self).__init__(*args, **kwargs)
         self.fields["malfunction_report"].queryset = MalfunctionReport.objects.filter(
             status="pending"
@@ -37,9 +41,9 @@ class ServiceReportForm(forms.ModelForm):
     image = forms.ImageField(required=False)
 
     class Meta:
-        model = ServiceReport
-        fields = ("malfunction_report", "description", "image", "service")
-        widgets = {
+        model: ServiceReport = ServiceReport
+        fields: tuple[str] = ("malfunction_report", "description", "image", "service")
+        widgets: dict[str, Union[Textarea, Select, Any]] = {
             "description": forms.Textarea(
                 attrs={
                     "class": "form-control",
