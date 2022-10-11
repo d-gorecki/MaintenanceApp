@@ -2,7 +2,7 @@ from django.db.models import QuerySet
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
 from django.views import View
-from maintenance.models import MaintenanceSchedule
+from maintenance.models.maintenance_schedule import MaintenanceSchedule
 
 
 class MaintenanceSchedules(View):

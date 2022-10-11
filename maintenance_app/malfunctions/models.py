@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from machines.models import Machine
+from machines.models.machine import Machine
 from django.conf import settings
 
 
@@ -25,15 +25,6 @@ class MalfunctionReport(models.Model):
 
     def __str__(self):
         return f"#{self.pk}-{self.machine}"
-
-
-class MalfunctionPending(models.Model):
-    machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
-    malfunction_report = models.OneToOneField(
-        MalfunctionReport, on_delete=models.CASCADE
-    )
-
-    # prop unnecessary model
 
 
 class ServiceReport(models.Model):

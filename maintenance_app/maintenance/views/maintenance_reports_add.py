@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
-from ..forms import MaintenanceReportForm
+from maintenance.forms.maintenance_report_form import MaintenanceReportForm
 from maintenance_app.mixins import ManagerMaintenanceGroupTestMixin
 
 

@@ -3,8 +3,7 @@ from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.views import View
-
-from ..models import MalfunctionReport
+from malfunctions.models.malfunction_report import MalfunctionReport
 from maintenance_app.mixins import ManagerMaintenanceGroupTestMixin
 
 

@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import Machine, MachineGroup
+
+# from .models import Machine, MachineGroup
+from machines.models.machine import Machine
+from machines.models.machine_group import MachineGroup
 
 
 @admin.register(Machine)

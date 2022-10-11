@@ -5,9 +5,10 @@ from django.db.models import QuerySet
 from django.shortcuts import render
 from plotly.offline import plot
 from plotly.graph_objs import Pie
-from malfunctions.models import MalfunctionReport, ServiceReport
-from maintenance.models import MaintenanceReport
-from machines.models import Machine
+from malfunctions.models.malfunction_report import MalfunctionReport
+from malfunctions.models.service_report import ServiceReport
+from maintenance.models.maintenance_report import MaintenanceReport
+from machines.models.machine import Machine
 from django.views import View
 from maintenance_app.mixins import ManagerGroupTestMixin
 from django.http import HttpRequest, HttpResponse

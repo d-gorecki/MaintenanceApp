@@ -3,7 +3,9 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from machines.forms import MachineAddForm
-from machines.models import Machine
+
+# from machines.models import Machine
+from machines.models.machine import Machine
 
 from maintenance_app.mixins import ManagerGroupTestMixin
 

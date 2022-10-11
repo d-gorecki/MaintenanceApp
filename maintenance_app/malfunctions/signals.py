@@ -2,8 +2,8 @@ from typing import Any
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .models import MalfunctionReport, ServiceReport
-from machines.models import Machine
+from malfunctions.models.malfunction_report import MalfunctionReport
+from machines.models.machine import Machine
 
 
 @receiver(post_save, sender=MalfunctionReport)

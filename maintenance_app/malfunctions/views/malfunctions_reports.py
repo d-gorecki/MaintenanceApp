@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
-from ..models import MalfunctionReport
+from malfunctions.models.malfunction_report import MalfunctionReport
 from maintenance_app.mixins import ManagerMaintenanceGroupTestMixin
 
 
