@@ -8,14 +8,14 @@ class MaintenanceReport(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     schedule = models.ForeignKey(
         MaintenanceSchedule,
-        on_delete=models.SET_DEFAULT,
-        default=1,
+        on_delete=models.SET_NULL,
+        null=True,
         help_text="Corresponding maintenance schedule",
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.SET_DEFAULT,
-        default=3,
+        on_delete=models.SET_NULL,
+        null=True,
         help_text="Serviceman",
     )
     description = models.TextField(help_text="Description")
