@@ -28,9 +28,10 @@ class MaintenanceReport(models.Model):
     def save(self, *args, **kwargs) -> None:
         """Resize passed images with resolution higher than 800x800 before saving to database"""
         super().save(*args, **kwargs)
-        img: Image = Image.open(self.image.path)
+        if self.image:
+            img: Image = Image.open(self.image.path)
 
-        if img.height > 800 or img.width > 800:
-            output_size: tuple[int] = (800, 800)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
+            if img.height > 800 or img.width > 800:
+                output_size: tuple[int] = (800, 800)
+                img.thumbnail(output_size)
+                img.save(self.image.path)
