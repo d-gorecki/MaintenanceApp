@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import MalfunctionReport, MalfunctionPending, ServiceReport
+from .models import MalfunctionReport, ServiceReport
 
 
 @admin.register(MalfunctionReport)
@@ -20,6 +20,3 @@ class AdminServiceReport(admin.ModelAdmin):
     )
     search_fields: tuple[str] = ("malfunction_report",)
     search_help_text: str = "malfunction_report"
-
-
-admin.site.register(MalfunctionPending)

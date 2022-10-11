@@ -27,15 +27,6 @@ class MalfunctionReport(models.Model):
         return f"#{self.pk}-{self.machine}"
 
 
-class MalfunctionPending(models.Model):
-    machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
-    malfunction_report = models.OneToOneField(
-        MalfunctionReport, on_delete=models.CASCADE
-    )
-
-    # prop unnecessary model
-
-
 class ServiceReport(models.Model):
     STATUS: tuple[tuple[str]] = (
         ("pending", "pending"),
