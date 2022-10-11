@@ -2,7 +2,7 @@ from typing import Any
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from malfunctions.models import MalfunctionReport
+from malfunctions.models.malfunction_report import MalfunctionReport
 from machines.models.machine import Machine
 
 
