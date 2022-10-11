@@ -4,8 +4,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from ..forms import ServiceReportForm
 from maintenance_app.mixins import ManagerMaintenanceGroupTestMixin
-
-from ..models import ServiceReport
+from malfunctions.models.service_report import ServiceReport
 
 
 class MalfunctionServicesAdd(

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import MalfunctionReport, ServiceReport
+from malfunctions.models.malfunction_report import MalfunctionReport
+from malfunctions.models.service_report import ServiceReport
 
 
 @admin.register(MalfunctionReport)

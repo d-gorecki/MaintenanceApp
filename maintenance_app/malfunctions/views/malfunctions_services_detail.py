@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
 from django.views import View
-from ..models import ServiceReport
+from malfunctions.models.service_report import ServiceReport
 from maintenance_app.mixins import ManagerMaintenanceGroupTestMixin
 
 
