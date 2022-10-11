@@ -1,7 +1,10 @@
 from typing import Union, Any
 
 from django import forms
-from .models import MaintenanceType, MaintenanceSchedule, MaintenanceReport
+from maintenance.models.maintenance_type import MaintenanceType
+from maintenance.models.maintenance_schedule import MaintenanceSchedule
+from maintenance.models.maintenance_report import MaintenanceReport
+
 from django.forms import Textarea, Select, DateInput
 
 

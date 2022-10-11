@@ -3,7 +3,10 @@ from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, redirect
 from django.views import View
 from ..forms import MaintenanceScheduleForm
-from ..models import MaintenanceSchedule
+
+from maintenance.models.maintenance_schedule import MaintenanceSchedule
+
+
 from maintenance_app.mixins import ManagerGroupTestMixin
 
 

@@ -3,7 +3,9 @@ from django.db.models import QuerySet
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
 from django.views import View
-from ..models import MaintenanceType
+from maintenance.models.maintenance_type import MaintenanceType
+
+
 from maintenance_app.mixins import ManagerMaintenanceGroupTestMixin
 
 

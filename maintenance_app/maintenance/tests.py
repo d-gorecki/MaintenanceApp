@@ -1,5 +1,8 @@
 import pytest
-from .models import MaintenanceType, MaintenanceSchedule, MaintenanceReport
+from maintenance.models.maintenance_type import MaintenanceType
+from maintenance.models.maintenance_schedule import MaintenanceSchedule
+from maintenance.models.maintenance_report import MaintenanceReport
+
 from machines.models import MachineGroup, Machine
 
 

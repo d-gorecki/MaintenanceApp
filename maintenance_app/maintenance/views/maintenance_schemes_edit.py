@@ -3,7 +3,9 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
 from ..forms import MaintenanceTypeForm
-from ..models import MaintenanceType
+from maintenance.models.maintenance_type import MaintenanceType
+
+
 from maintenance_app.mixins import ManagerGroupTestMixin
 
 
