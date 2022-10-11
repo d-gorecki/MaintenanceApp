@@ -4,7 +4,6 @@ from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
 from django.views import View
 from maintenance.models.maintenance_type import MaintenanceType
-
 from maintenance_app.mixins import ManagerMaintenanceGroupTestMixin
 
 
