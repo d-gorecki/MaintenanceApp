@@ -26,4 +26,4 @@ class MalfunctionsReportsAdd(View):
             report: MalfunctionReport = form.save(commit=False)
             report.user = request.user
             report.save()
-            return redirect("/malfunctions/pending/")
+            return redirect("machines")

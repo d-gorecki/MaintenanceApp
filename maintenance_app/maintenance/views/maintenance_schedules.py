@@ -13,10 +13,12 @@ class MaintenanceSchedules(View):
             schedules: QuerySet[
                 MaintenanceSchedule
             ] = MaintenanceSchedule.objects.filter(
-                machine__department=request.user.department
+                machine__department=request.user.department, status="pending"
             )
         else:
-            schedules: QuerySet[MaintenanceSchedule] = MaintenanceSchedule.objects.all()
+            schedules: QuerySet[
+                MaintenanceSchedule
+            ] = MaintenanceSchedule.objects.filter(status="pending")
 
         context: dict[str, QuerySet[MaintenanceSchedule]] = {"schedules": schedules}
         return render(request, "maintenance/maintenance_schedules.html", context)

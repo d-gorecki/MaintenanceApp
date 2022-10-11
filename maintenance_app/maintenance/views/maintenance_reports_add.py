@@ -21,4 +21,4 @@ class MaintenanceReportsAdd(LoginRequiredMixin, ManagerMaintenanceGroupTestMixin
             report: MaintenanceReportForm = form.save(commit=False)
             report.user = request.user
             report.save()
-            return redirect("/maintenance/schedules/reports/")
+        return redirect("/maintenance/schedules/reports/")

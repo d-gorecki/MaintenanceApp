@@ -13,7 +13,7 @@ class MaintenanceSchemes(LoginRequiredMixin, ManagerMaintenanceGroupTestMixin, V
     """Base view for maintenance schemes (sub-module of maintenance app)"""
 
     template_name: str = "maintenance/maintenance_schemes.html"
-    schemes: QuerySet[MaintenanceType] = MaintenanceType.objects.all()
+    schemes: QuerySet[MaintenanceType] = MaintenanceType.objects.all().order_by("id")
 
     def get(self, request: HttpRequest) -> HttpResponse:
         return render(request, self.template_name, {"schemes": self.schemes})

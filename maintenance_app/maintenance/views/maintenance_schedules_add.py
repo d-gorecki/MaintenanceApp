@@ -16,8 +16,7 @@ class MaintenanceSchedulesAdd(LoginRequiredMixin, ManagerGroupTestMixin, View):
         return render(request, self.template_name, {"form": self.form_class()})
 
     def post(self, request: HttpRequest) -> HttpResponse:
-        if request.method == "POST":
-            form: MaintenanceScheduleForm = self.form(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect("/maintenance/schedules/")
+        form: MaintenanceScheduleForm = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/maintenance/schedules/")

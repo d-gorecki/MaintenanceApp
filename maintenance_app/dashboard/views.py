@@ -20,10 +20,10 @@ class Dashboard(LoginRequiredMixin, ManagerGroupTestMixin, View):
     malfunction reports. 3. Three latest maintenance reports. 4. Three latest service reports."""
 
     def get(self, request: HttpRequest) -> HttpResponse:
-        labels: list[str] = ["available", "nonworking"]
+        labels: list[str] = ["available", "malfunction"]
         values: list[int] = [
             Machine.objects.filter(machine_status="available").count(),
-            Machine.objects.filter(machine_status="nonwork").count(),
+            Machine.objects.filter(machine_status="malfunction").count(),
         ]
         plot_div: str = plot(
             [Pie(labels=labels, values=values, textinfo="label+percent")],

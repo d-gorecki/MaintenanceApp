@@ -2,7 +2,7 @@ from typing import Any
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from malfunctions.models import MalfunctionReport
+from malfunctions.models.malfunction_report import MalfunctionReport
 from machines.models.machine import Machine
 
 
@@ -14,5 +14,5 @@ def change_machine_status(
     **kwargs: dict[str, Any]
 ) -> None:
     machine: Machine = Machine.objects.get(pk=instance.machine.pk)
-    machine.machine_status = "nonwork"
+    machine.machine_status = "malfunction"
     machine.save()
