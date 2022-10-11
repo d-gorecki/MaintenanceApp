@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
-from ..forms import ManagerUserCreationForm
+from users.forms.manager_user_creation_form import ManagerUserCreationForm
 from maintenance_app.mixins import ManagerGroupTestMixin
 
 
