@@ -4,10 +4,10 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
 from ..forms import ManagerUserCreationForm
-from maintenance_app.mixins import ManagerMaintenanceGroupTestMixin
+from maintenance_app.mixins import ManagerGroupTestMixin
 
 
-class UsersAdd(LoginRequiredMixin, ManagerMaintenanceGroupTestMixin, View):
+class UsersAdd(LoginRequiredMixin, ManagerGroupTestMixin, View):
     """Create view for users app"""
 
     form_class: ManagerUserCreationForm = ManagerUserCreationForm

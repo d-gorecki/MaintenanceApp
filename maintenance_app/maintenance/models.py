@@ -1,10 +1,12 @@
 from django.db import models
-from machines.models import MachineGroup, Machine
+from machines.models.machine import Machine
+from machines.models.machine_group import MachineGroup
+
 from django.contrib.auth.models import User
 from django.conf import settings
 from PIL import Image
 
-# TODO help_text
+
 class MaintenanceType(models.Model):
     MAINTENANCE_TYPES: tuple[tuple[str]] = (
         ("week", "weekly maintenance"),

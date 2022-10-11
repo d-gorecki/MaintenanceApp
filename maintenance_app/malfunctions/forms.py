@@ -2,7 +2,7 @@ from typing import Any, Union
 
 from django import forms
 from django.forms import Select, Textarea
-from machines.models import Machine
+from machines.models.machine import Machine
 from .models import MalfunctionReport, ServiceReport
 from users.models import User
 

@@ -3,7 +3,8 @@ from typing import Union
 from django import forms
 from django.forms import Select, DateInput, TextInput
 
-from .models import Machine
+# from .models import Machine
+from machines.models.machine import Machine
 
 
 class MachineAddForm(forms.ModelForm):

@@ -5,7 +5,7 @@ class ManagerGroupTestMixin(UserPassesTestMixin):
     """Mixin class to determine if request.user belongs to manager group"""
 
     def test_func(self) -> bool:
-        return self.request.user.group == "manager"
+        return self.request.user.group == "manager" or self.request.user.is_superuser
 
 
 class ManagerMaintenanceGroupTestMixin(UserPassesTestMixin):

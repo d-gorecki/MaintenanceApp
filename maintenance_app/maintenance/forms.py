@@ -2,7 +2,6 @@ from typing import Union, Any
 
 from django import forms
 from .models import MaintenanceType, MaintenanceSchedule, MaintenanceReport
-from machines.models import MachineGroup
 from django.forms import Textarea, Select, DateInput
 
 

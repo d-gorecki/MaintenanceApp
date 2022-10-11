@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from machines.models import Machine
+from machines.models.machine import Machine
 from django.conf import settings
 
 

@@ -7,7 +7,7 @@ from plotly.offline import plot
 from plotly.graph_objs import Pie
 from malfunctions.models import MalfunctionReport, ServiceReport
 from maintenance.models import MaintenanceReport
-from machines.models import Machine
+from machines.models.machine import Machine
 from django.views import View
 from maintenance_app.mixins import ManagerGroupTestMixin
 from django.http import HttpRequest, HttpResponse
