@@ -16,7 +16,11 @@
         <div>{{ object.description }}</div>
         <hr>
         <div><strong>Attachements:</strong></div>
+        {% if object.image %}
         <img src="{{ object.image.url }}">
+        {% else %}
+        <p>No image provided</p>
+        {% endif %}
     </div>
 </div>
 

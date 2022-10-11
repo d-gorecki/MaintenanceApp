@@ -6,7 +6,7 @@ from maintenance.models.maintenance_schedule import MaintenanceSchedule
 
 class MaintenanceReport(models.Model):
     date = models.DateTimeField(auto_now_add=True)
-    schedule = models.ForeignKey(
+    schedule = models.OneToOneField(
         MaintenanceSchedule,
         on_delete=models.SET_NULL,
         null=True,
@@ -20,7 +20,9 @@ class MaintenanceReport(models.Model):
     )
     description = models.TextField(help_text="Description")
     image = models.ImageField(
-        upload_to="media/maintenance_reports", help_text="Allowed formats (.jpg, .png)"
+        upload_to="media/maintenance_reports",
+        help_text="Allowed formats (.jpg, .png)",
+        blank=True,
     )
 
     def save(self, *args, **kwargs) -> None:

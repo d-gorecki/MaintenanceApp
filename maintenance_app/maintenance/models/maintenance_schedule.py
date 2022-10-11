@@ -5,6 +5,10 @@ from maintenance.models.maintenance_type import MaintenanceType
 
 
 class MaintenanceSchedule(models.Model):
+    STATUS = (
+        ("pending", "pending"),
+        ("done", "done"),
+    )
     machine = models.ForeignKey(Machine, on_delete=models.CASCADE, help_text="Machine")
     maintenance_type = models.ForeignKey(
         MaintenanceType, on_delete=models.CASCADE, help_text="Maintenance type"
@@ -15,6 +19,12 @@ class MaintenanceSchedule(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         help_text="Responsible",
+    )
+    status = models.CharField(
+        max_length=7,
+        choices=STATUS,
+        default="pending",
+        help_text="Schedule status (" "pending/available",
     )
 
     def __str__(self):
