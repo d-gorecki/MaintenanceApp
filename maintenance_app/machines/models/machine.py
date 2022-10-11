@@ -6,13 +6,12 @@ from departments.models import Department
 class Machine(models.Model):
     STATUS = (
         ("available", "working fine"),
-        ("nonwork", "not working"),
-        ("attention", "need some repairs but working"),
+        ("malfunction", "not working"),
     )
 
     factory_number = models.CharField(max_length=100, help_text="Factory number")
     machine_group = models.ForeignKey(
-        MachineGroup, on_delete=models.CASCADE, default=0, help_text="Machine group"
+        MachineGroup, on_delete=models.CASCADE, help_text="Machine group"
     )
     name = models.CharField(max_length=100, help_text="Machine name(model)")
     number = models.CharField(max_length=100, help_text="Department number")

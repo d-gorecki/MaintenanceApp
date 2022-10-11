@@ -14,5 +14,5 @@ def change_machine_status(
     **kwargs: dict[str, Any]
 ) -> None:
     machine: Machine = Machine.objects.get(pk=instance.machine.pk)
-    machine.machine_status = "nonwork"
+    machine.machine_status = "malfunction"
     machine.save()
