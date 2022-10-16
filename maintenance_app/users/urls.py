@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 from .views import users, users_profile, users_edit, users_add
 
-urlpatterns: list[Callable] = [
+urlpatterns = [
     path("", users.Users.as_view(), name="users"),
     path("edit/<int:pk>/", users_edit.UsersEdit.as_view(), name="users_edit"),
     path("profile/", users_profile.UsersProfile.as_view(), name="users_profile"),
