@@ -4,7 +4,7 @@ from departments.models import Department
 
 class DepartmentTest(TestCase):
     @classmethod
-    def setUpTestData(cls):
+    def setUp(cls):
         cls.obj_id = Department.objects.create(name="test-department").pk
 
     def test_name_label(self):

@@ -8,7 +8,7 @@ from django.utils.timezone import now as django_now
 
 class MachineGroupTest(TestCase):
     @classmethod
-    def setUpTestData(cls):
+    def setUp(cls):
         cls.obj_id = MachineGroup.objects.create(name="Test-group").pk
 
     def test_name_label(self):
