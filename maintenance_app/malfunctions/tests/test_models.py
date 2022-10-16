@@ -121,10 +121,3 @@ class ServiceReportTest(MalfunctionTestBaseClass):
         service = ServiceReport.objects.get(pk=self.obj_id)
         max_length = service._meta.get_field("service").max_length
         self.assertEqual(max_length, 8)
-
-    def test_service_report_sets_malfunction_report_status_as_finished(self):
-        service = ServiceReport.objects.get(pk=self.obj_id)
-        service.status = "finished"
-        service.save()
-
-        self.assertTrue(self.malfunction_report.status == "finished")
