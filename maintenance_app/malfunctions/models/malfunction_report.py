@@ -16,7 +16,9 @@ class MalfunctionReport(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
     description = models.TextField(help_text="Description")
     image = models.ImageField(
-        upload_to="media/malfunction_issues", help_text="Allowed format (.jpg, .png)"
+        upload_to="media/malfunction_issues",
+        help_text="Allowed format (.jpg, .png)",
+        blank=True,
     )
     status = models.CharField(
         max_length=8, choices=STATUS, default="pending", help_text="Machine status"
