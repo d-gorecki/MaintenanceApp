@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_extensions",
     "crispy_forms",
+    "django_crontab",
 ]
 
 MIDDLEWARE = [
@@ -147,3 +148,8 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = os.getenv("EMAIL_PORT")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWD")
+
+
+CRONJOBS = [
+    ("15 13 * * * ", "django.core.management.call_command", ["sendremainder"]),
+]
