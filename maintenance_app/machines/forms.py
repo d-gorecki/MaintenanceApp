@@ -11,6 +11,7 @@ class MachineAddForm(forms.ModelForm):
 
         widgets: dict[str, Union[TextInput, Select]] = {
             "factory_number": TextInput(attrs={"class": "form-control"}),
+            "name": TextInput(attrs={"class": "form-control"}),
             "producer": TextInput(attrs={"class": "form-control"}),
             "machine_group": Select(attrs={"class": "form-select"}),
             "machine_status": Select(attrs={"class": "form-select"}),
