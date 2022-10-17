@@ -4,6 +4,7 @@ from departments.models import Department
 from users.models import User
 from machines.models.machine_group import MachineGroup
 from machines.models.machine import Machine
+from django.utils.timezone import now as django_now
 
 
 class MachinesBaseViewTest(TestCase):
@@ -66,20 +67,32 @@ class MachinesBaseViewTest(TestCase):
 class MachinesAddViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        department_1 = Department.objects.create(name="Department1")
+        cls.department_1 = Department.objects.create(name="Department1")
         User.objects.create_user(
             username="test1",
             password="zaq1@WSX",
-            department=department_1,
+            department=cls.department_1,
             group="manager",
         )
 
         User.objects.create_user(
             username="noprivilages",
             password="zaq1@WSX",
-            department=department_1,
+            department=cls.department_1,
             group="production",
         )
+
+        cls.machine_group = MachineGroup.objects.create(name="test")
+
+        cls.form_data = {
+            "factory_number": "1",
+            "machine_group": cls.machine_group,
+            "name": "111",
+            "number": "111",
+            "producer": "test",
+            "department": cls.department_1,
+            "machine_status": "available",
+        }
 
     def test_url_exists_at_desired_location(self):
         self.client.login(username="test1", password="zaq1@WSX")
@@ -109,24 +122,31 @@ class MachinesAddViewTest(TestCase):
 class MachinesEditViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        department_1 = Department.objects.create(name="Department1")
+        cls.department_id = Department.objects.create(name="Department1").pk
         User.objects.create_user(
             username="test1",
             password="zaq1@WSX",
-            department=department_1,
+            department=Department.objects.get(pk=cls.department_id),
             group="manager",
         )
 
         User.objects.create_user(
             username="noprivilages",
             password="zaq1@WSX",
-            department=department_1,
+            department=Department.objects.get(pk=cls.department_id),
             group="production",
         )
 
-        machine_group = MachineGroup.objects.create(name="test")
+        cls.group_id = MachineGroup.objects.create(name="test").pk
         cls.machine_id = Machine.objects.create(
-            factory_number="1", machine_group=machine_group, department=department_1
+            factory_number="11111",
+            machine_group=MachineGroup.objects.get(id=cls.group_id),
+            name="Test-name",
+            number="1111",
+            producer="test",
+            purchase_data=django_now(),
+            department=Department.objects.get(id=cls.department_id),
+            machine_status="available",
         ).pk
 
     def test_url_exists_at_desired_location(self):
