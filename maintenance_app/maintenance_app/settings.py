@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_extensions",
     "crispy_forms",
+    "django_crontab",
 ]
 
 MIDDLEWARE = [
@@ -139,3 +140,16 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 LOGIN_REDIRECT_URL = "machines"
 LOGIN_URL = "users_login"
 TEST_RUNNER = "redgreenunittest.django.runner.RedGreenDiscoverRunner"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
+SERVER_EMAIL = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_USE_TLS = True
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWD")
+
+
+CRONJOBS = [
+    ("15 13 * * * ", "django.core.management.call_command", ["sendremainder"]),
+]
