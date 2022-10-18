@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "departments",
     "users",
     "dashboard",
+    "API",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     "django_extensions",
     "crispy_forms",
     "django_crontab",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [

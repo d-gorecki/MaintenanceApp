@@ -31,4 +31,5 @@ urlpatterns: list[Callable] = [
     path("maintenance/", include("maintenance.urls")),
     path("users/", include("users.urls")),
     path("dashboard/", include("dashboard.urls")),
+    path("api/", include("API.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

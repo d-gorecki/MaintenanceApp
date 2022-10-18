@@ -13,7 +13,5 @@ class MalfunctionsPending(LoginRequiredMixin, ManagerMaintenanceGroupTestMixin, 
     template_name: str = "malfunctions/malfunctions_pending.html"
 
     def get(self, request: HttpRequest) -> HttpResponse:
-        malfunctions: QuerySet[MalfunctionReport] = MalfunctionReport.objects.filter(
-            status="pending"
-        )
+        malfunctions: QuerySet[MalfunctionReport] = MalfunctionReport.pending.all()
         return render(request, self.template_name, {"malfunctions": malfunctions})

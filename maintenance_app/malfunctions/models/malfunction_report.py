@@ -3,6 +3,11 @@ from machines.models.machine import Machine
 from django.conf import settings
 
 
+class MalfunctionsPendingManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status="pending")
+
+
 class MalfunctionReport(models.Model):
     STATUS: tuple[tuple[str]] = (("pending", "pending"), ("finished", "finished"))
 
@@ -23,6 +28,9 @@ class MalfunctionReport(models.Model):
     status = models.CharField(
         max_length=8, choices=STATUS, default="pending", help_text="Machine status"
     )
+
+    objects = models.Manager()
+    pending = MalfunctionsPendingManager()
 
     def __str__(self):
         return f"#{self.pk}-{self.machine}"
