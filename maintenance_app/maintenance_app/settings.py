@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "departments",
     "users",
     "dashboard",
+    "API",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     "django_extensions",
     "crispy_forms",
     "django_crontab",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -147,7 +149,7 @@ EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_USE_TLS = True
 EMAIL_PORT = os.getenv("EMAIL_PORT")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWD")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
 
 CRONJOBS = [
