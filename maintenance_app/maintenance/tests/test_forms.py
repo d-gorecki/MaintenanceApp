@@ -4,7 +4,7 @@ from maintenance.forms.maintenance_report_form import MaintenanceReportForm
 from maintenance.forms.maintenance_schedule_form import MaintenanceScheduleForm
 
 
-class MaintenanceFormsTest(TestCase):
+class TestMaintenanceForms(TestCase):
     def test_maintenance_type_form(self):
         form = MaintenanceTypeForm()
         fields = ["description", "machine_group", "type"]

@@ -3,7 +3,7 @@ from users.forms.user_update_form import UserUpdateForm
 from users.forms.manager_user_creation_form import ManagerUserCreationForm
 
 
-class UserFormsTest(TestCase):
+class TestUserForms(TestCase):
     def test_user_update_form(self):
         form = UserUpdateForm()
         fields = [

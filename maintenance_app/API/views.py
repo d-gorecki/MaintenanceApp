@@ -1,6 +1,7 @@
 from django.db.models import QuerySet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import generics
+from rest_framework import viewsets
 from API.serializers import MachineSerializer, MachineGroupSerializer
 from machines.models.machine import Machine
 from machines.models.machine_group import MachineGroup
