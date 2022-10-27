@@ -3,6 +3,11 @@ from django.conf import settings
 from malfunctions.models.malfunction_report import MalfunctionReport
 
 
+class ServicesDashboardManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().order_by("-id")[:3]
+
+
 class ServiceReport(models.Model):
     STATUS: tuple[tuple[str]] = (
         ("pending", "pending"),
@@ -34,6 +39,9 @@ class ServiceReport(models.Model):
         default="pending",
         help_text="Status after service",
     )
+
+    objects = models.Manager()
+    services_dashboard = ServicesDashboardManager()
 
     def save(self, *args, **kwargs) -> None:
         """If ServiceReport status field has been set to finished, save method sets status of corresponding

@@ -32,13 +32,13 @@ class Dashboard(LoginRequiredMixin, ManagerGroupTestMixin, View):
 
         malfunctions_reports: QuerySet[
             MalfunctionReport
-        ] = MalfunctionReport.objects.all().order_by("-id")[:3]
+        ] = MalfunctionReport.malfunctions_pending_dashboard.all()
         maintenance_reports: QuerySet[
             MaintenanceReport
-        ] = MaintenanceReport.objects.all().order_by("-id")[:3]
+        ] = MaintenanceReport.maintenance_dashboard.all()
         malfunctions_services: QuerySet[
             ServiceReport
-        ] = ServiceReport.objects.all().order_by("-id")[:3]
+        ] = ServiceReport.services_dashboard.all()
 
         context: dict[
             str,

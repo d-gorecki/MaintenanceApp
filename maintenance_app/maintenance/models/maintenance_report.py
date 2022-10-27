@@ -4,6 +4,11 @@ from PIL import Image
 from maintenance.models.maintenance_schedule import MaintenanceSchedule
 
 
+class MaintenanceDashboardManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().order_by("-id")[:3]
+
+
 class MaintenanceReport(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     schedule = models.OneToOneField(
@@ -24,6 +29,9 @@ class MaintenanceReport(models.Model):
         help_text="Allowed formats (.jpg, .png)",
         blank=True,
     )
+
+    objects = models.Manager()
+    maintenance_dashboard = MaintenanceDashboardManager()
 
     def save(self, *args, **kwargs) -> None:
         """Resize passed images with resolution higher than 800x800 before saving to database"""
