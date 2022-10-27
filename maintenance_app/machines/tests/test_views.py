@@ -1,51 +1,36 @@
 from django.test import TestCase
 from django.urls import reverse
 from departments.models import Department
-from users.models import User
 from machines.models.machine_group import MachineGroup
-from machines.models.machine import Machine
-from django.utils.timezone import now as django_now
+from dashboard.tests import UserTestUtils
+from machines.tests.test_models import MachineTestUtils
+from rest_framework import status
 
 
-class MachinesBaseViewTest(TestCase):
+class TestMachinesBaseView(TestCase):
     @classmethod
     def setUpTestData(cls):
         department_1 = Department.objects.create(name="Department1")
         department_2 = Department.objects.create(name="Department2")
-        User.objects.create_user(
-            username="test1",
-            password="zaq1@WSX",
-            department=department_1,
-            group="manager",
+        UserTestUtils.create_user(
+            username="test1", department=department_1, group="manager"
         )
-
-        User.objects.create_user(
-            username="test2",
-            password="zaq1@WSX",
-            department=department_2,
-            group="production",
-        )
-
-        machine_group = MachineGroup.objects.create(name="test")
-        Machine.objects.create(
-            factory_number="1", machine_group=machine_group, department=department_1
-        )
-        Machine.objects.create(
-            factory_number="2", machine_group=machine_group, department=department_2
-        )
+        UserTestUtils.create_user(username="test2", department=department_2)
+        MachineTestUtils.create_machine(department=department_1)
+        MachineTestUtils.create_machine(department=department_2)
 
     def test_url_exists_at_desired_location(self):
-        self.client.login(username="test1", password="zaq1@WSX")
-        response = self.client.get("")
-        self.assertEqual(response.status_code, 200)
+        self.client.login(username="test1", password=UserTestUtils.user_password)
+        response = self.client.get("/")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_accessible_by_url_name(self):
-        self.client.login(username="test1", password="zaq1@WSX")
+        self.client.login(username="test1", password=UserTestUtils.user_password)
         response = self.client.get((reverse("machines")))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_uses_correct_template(self):
-        self.client.login(username="test1", password="zaq1@WSX")
+        self.client.login(username="test1", password=UserTestUtils.user_password)
         response = self.client.get((reverse("machines")))
         self.assertTemplateUsed(response, "machines/machines.html")
 
@@ -54,58 +39,43 @@ class MachinesBaseViewTest(TestCase):
         self.assertRedirects(response, "/users/login/?next=/machines/")
 
     def test_displays_machines_for_particular_department(self):
-        self.client.login(username="test2", password="zaq1@WSX")
+        self.client.login(username="test2", password=UserTestUtils.user_password)
         response = self.client.get((reverse("machines")))
         self.assertEqual(len(response.context["machines"]), 1)
 
     def test_displays_all_machines_for_manager(self):
-        self.client.login(username="test1", password="zaq1@WSX")
+        self.client.login(username="test1", password=UserTestUtils.user_password)
         response = self.client.get((reverse("machines")))
         self.assertEqual(len(response.context["machines"]), 2)
 
 
-class MachinesAddViewTest(TestCase):
+class TestMachinesAddView(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.department_1 = Department.objects.create(name="Department1")
-        User.objects.create_user(
-            username="test1",
-            password="zaq1@WSX",
-            department=cls.department_1,
-            group="manager",
-        )
-
-        User.objects.create_user(
-            username="noprivilages",
-            password="zaq1@WSX",
-            department=cls.department_1,
-            group="production",
-        )
-
-        cls.machine_group = MachineGroup.objects.create(name="test")
-
+        UserTestUtils.create_user(group="manager")
+        UserTestUtils.create_user(username="noprivilages")
         cls.form_data = {
             "factory_number": "1",
-            "machine_group": cls.machine_group,
+            "machine_group": MachineGroup.objects.create(name="test"),
             "name": "111",
             "number": "111",
             "producer": "test",
-            "department": cls.department_1,
+            "department": Department.objects.create(name="Department1"),
             "machine_status": "available",
         }
 
     def test_url_exists_at_desired_location(self):
-        self.client.login(username="test1", password="zaq1@WSX")
+        self.client.login(username="test1", password=UserTestUtils.user_password)
         response = self.client.get("/machines/add/")
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_accessible_by_url_name(self):
-        self.client.login(username="test1", password="zaq1@WSX")
+        self.client.login(username="test1", password=UserTestUtils.user_password)
         response = self.client.get((reverse("machines_add")))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_uses_correct_template(self):
-        self.client.login(username="test1", password="zaq1@WSX")
+        self.client.login(username="test1", password=UserTestUtils.user_password)
         response = self.client.get((reverse("machines_add")))
         self.assertTemplateUsed(response, "machines/machines_add.html")
 
@@ -114,55 +84,32 @@ class MachinesAddViewTest(TestCase):
         self.assertRedirects(response, "/users/login/?next=/machines/add/")
 
     def test_403_if_not_manager(self):
-        self.client.login(username="noprivilages", password="zaq1@WSX")
+        self.client.login(username="noprivilages", password=UserTestUtils.user_password)
         response = self.client.get((reverse("machines_add")))
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
-class MachinesEditViewTest(TestCase):
+class TestMachinesEditView(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.department_id = Department.objects.create(name="Department1").pk
-        User.objects.create_user(
-            username="test1",
-            password="zaq1@WSX",
-            department=Department.objects.get(pk=cls.department_id),
-            group="manager",
-        )
-
-        User.objects.create_user(
-            username="noprivilages",
-            password="zaq1@WSX",
-            department=Department.objects.get(pk=cls.department_id),
-            group="production",
-        )
-
-        cls.group_id = MachineGroup.objects.create(name="test").pk
-        cls.machine_id = Machine.objects.create(
-            factory_number="11111",
-            machine_group=MachineGroup.objects.get(id=cls.group_id),
-            name="Test-name",
-            number="1111",
-            producer="test",
-            purchase_data=django_now(),
-            department=Department.objects.get(id=cls.department_id),
-            machine_status="available",
-        ).pk
+        UserTestUtils.create_user(group="manager")
+        UserTestUtils.create_user(username="noprivilages")
+        cls.machine_id = MachineTestUtils.create_machine().pk
 
     def test_url_exists_at_desired_location(self):
-        self.client.login(username="test1", password="zaq1@WSX")
+        self.client.login(username="test1", password=UserTestUtils.user_password)
         response = self.client.get(f"/machines/edit/{self.machine_id}/")
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_accessible_by_url_name(self):
-        self.client.login(username="test1", password="zaq1@WSX")
+        self.client.login(username="test1", password=UserTestUtils.user_password)
         response = self.client.get(
             (reverse("machines_edit", kwargs={"pk": self.machine_id}))
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_uses_correct_template(self):
-        self.client.login(username="test1", password="zaq1@WSX")
+        self.client.login(username="test1", password=UserTestUtils.user_password)
         response = self.client.get(
             (reverse("machines_edit", kwargs={"pk": self.machine_id}))
         )
@@ -177,8 +124,8 @@ class MachinesEditViewTest(TestCase):
         )
 
     def test_403_if_not_manager(self):
-        self.client.login(username="noprivilages", password="zaq1@WSX")
+        self.client.login(username="noprivilages", password=UserTestUtils.user_password)
         response = self.client.get(
             (reverse("machines_edit", kwargs={"pk": self.machine_id}))
         )
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

@@ -7,6 +7,9 @@ from API.views import (
     UpdateMachine,
 )
 
+# TODO Router DRF
+
+
 urlpatterns = [
     path("machines/", GetAllMachines.as_view(), name="get_machines"),
     path("machines/<int:pk>/", GetMachine.as_view(), name="get_machine"),
