@@ -1,36 +1,42 @@
 from django.test import TestCase
 from django.urls import reverse
-from departments.models import Department
-from machines.models.machine_group import MachineGroup
 from dashboard.tests import UserTestUtils
-from machines.tests.test_models import MachineTestUtils
 from rest_framework import status
+from machines.tests.factory import (
+    UserFactory,
+    DepartmentFactory,
+    MachineGroupFactory,
+    MachineFactory,
+)
 
 
 class TestMachinesBaseView(TestCase):
     @classmethod
     def setUpTestData(cls):
-        department_1 = Department.objects.create(name="Department1")
-        department_2 = Department.objects.create(name="Department2")
-        UserTestUtils.create_user(
-            username="test1", department=department_1, group="manager"
-        )
-        UserTestUtils.create_user(username="test2", department=department_2)
-        MachineTestUtils.create_machine(department=department_1)
-        MachineTestUtils.create_machine(department=department_2)
+        UserFactory.reset_sequence()
+        MachineFactory.reset_sequence()
+        DepartmentFactory.reset_sequence()
+        cls.passwd = "zaq1@WSX"
+        department_1 = DepartmentFactory()
+        department_2 = DepartmentFactory()
+        UserFactory()
+        UserFactory(department=department_1, group="manager")
+        UserFactory(department=department_2, group="production")
+        MachineFactory.create(department=department_1)
+        MachineFactory.create(department=department_2)
 
     def test_url_exists_at_desired_location(self):
-        self.client.login(username="test1", password=UserTestUtils.user_password)
+        self.client.login(username="test1", password=self.passwd)
         response = self.client.get("/")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_accessible_by_url_name(self):
-        self.client.login(username="test1", password=UserTestUtils.user_password)
+        self.client.login(username="test1", password=self.passwd)
         response = self.client.get((reverse("machines")))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_uses_correct_template(self):
-        self.client.login(username="test1", password=UserTestUtils.user_password)
+        self.client.login(username="test1", password=self.passwd)
         response = self.client.get((reverse("machines")))
         self.assertTemplateUsed(response, "machines/machines.html")
 
@@ -39,12 +45,12 @@ class TestMachinesBaseView(TestCase):
         self.assertRedirects(response, "/users/login/?next=/machines/")
 
     def test_displays_machines_for_particular_department(self):
-        self.client.login(username="test2", password=UserTestUtils.user_password)
+        self.client.login(username="test2", password=self.passwd)
         response = self.client.get((reverse("machines")))
         self.assertEqual(len(response.context["machines"]), 1)
 
     def test_displays_all_machines_for_manager(self):
-        self.client.login(username="test1", password=UserTestUtils.user_password)
+        self.client.login(username="test1", password=self.passwd)
         response = self.client.get((reverse("machines")))
         self.assertEqual(len(response.context["machines"]), 2)
 
@@ -52,15 +58,19 @@ class TestMachinesBaseView(TestCase):
 class TestMachinesAddView(TestCase):
     @classmethod
     def setUpTestData(cls):
-        UserTestUtils.create_user(group="manager")
-        UserTestUtils.create_user(username="noprivilages")
+        UserFactory.reset_sequence()
+        MachineGroupFactory.reset_sequence()
+        DepartmentFactory.reset_sequence()
+        UserFactory()
+        UserFactory(group="manager")
+        UserFactory(username="noprivilages")
         cls.form_data = {
             "factory_number": "1",
-            "machine_group": MachineGroup.objects.create(name="test"),
+            "machine_group": MachineGroupFactory(),
             "name": "111",
             "number": "111",
             "producer": "test",
-            "department": Department.objects.create(name="Department1"),
+            "department": DepartmentFactory(),
             "machine_status": "available",
         }
 
@@ -92,9 +102,12 @@ class TestMachinesAddView(TestCase):
 class TestMachinesEditView(TestCase):
     @classmethod
     def setUpTestData(cls):
-        UserTestUtils.create_user(group="manager")
-        UserTestUtils.create_user(username="noprivilages")
-        cls.machine_id = MachineTestUtils.create_machine().pk
+        UserFactory.reset_sequence()
+        MachineFactory.reset_sequence()
+        UserFactory()
+        UserFactory(group="manager")
+        UserFactory(username="noprivilages")
+        cls.machine_id = MachineFactory().pk
 
     def test_url_exists_at_desired_location(self):
         self.client.login(username="test1", password=UserTestUtils.user_password)
