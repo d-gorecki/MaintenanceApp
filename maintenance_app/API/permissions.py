@@ -1,15 +1,11 @@
-from rest_framework.permissions import BasePermission
-
-
-class MaintenancePermission(BasePermission):
-    def has_permission(self, request, view):
-        if request.user.is_authenticated:
-            return request.user.group in ["maintenance", "manager"]
-        return False
+from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 
 class ManagerPermission(BasePermission):
     def has_permission(self, request, view):
-        if request.user.is_authenticated:
-            return request.user.group == "manager"
-        return False
+        return bool(
+            request.method in SAFE_METHODS
+            or request.user
+            and request.user.is_authenticated
+            and request.user.group == "manager"
+        )

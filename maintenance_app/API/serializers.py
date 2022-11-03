@@ -2,13 +2,21 @@ from typing import OrderedDict, Any
 
 from rest_framework import serializers
 from machines.models.machine import Machine
-from machines.models.machine_group import MachineGroup
 
 
 class MachineSerializer(serializers.ModelSerializer):
     class Meta:
         model: Machine = Machine
-        fields: str = "__all__"
+        fields: list[str] = [
+            "factory_number",
+            "machine_group",
+            "name",
+            "number",
+            "producer",
+            "purchase_data",
+            "department",
+            "machine_status",
+        ]
 
     def to_representation(self, instance) -> OrderedDict[Any, Any | None]:
         representation: OrderedDict[Any, Any | None] = super().to_representation(
@@ -20,9 +28,3 @@ class MachineSerializer(serializers.ModelSerializer):
                 "%d-%m-%Y"
             )
         return representation
-
-
-class MachineGroupSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MachineGroup
-        fields = "__all__"
