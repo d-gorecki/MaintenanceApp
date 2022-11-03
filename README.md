@@ -3,10 +3,10 @@
 # Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
-* [Tools](#Tools)
-* [Environment](#Environment)
+* [Tools](#tools)
+* [Environment](#environment)
 * [Setup](#setup)
-* [API](#Available API requests)
+* [API](#available-api-requests)
 
 
 ## General info
@@ -54,7 +54,7 @@ In order to activate SMTP service add the following lines to .env file: \
 ## Setup
 To run this project use the following commands in project directory: \
 `$ docker-compose build` \
-`$ docker-compose up` \
+`$ docker-compose up`
 
 App is available at **127.0.0.1:8080**
 
@@ -64,7 +64,7 @@ App is available at **127.0.0.1:8080**
 `POST /api/machines/` Adds new machine to database \
 `PUT /api/machines/{id}/` Modify machine object with specified ID \
 `PATCH /api/machines/` Modify particular field of machine object with specified ID \
-`DELETE /api/machines/{id}/` Removes machine with specified ID from database \
+`DELETE /api/machines/{id}/` Removes machine with specified ID from database
 
 
 ## Application view
