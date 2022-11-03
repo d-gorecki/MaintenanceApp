@@ -45,30 +45,26 @@ In order to build the application you need to define environment variables in th
 `DB_HOST=localhost`\
 `DB_PORT=5432`
 
-In order to activate SMTP service add the following lines to .env file:
+In order to activate SMTP service add the following lines to .env file: \
 `EMAIL_HOST_USER=(your_email_username)`\
 `EMAIL_HOST_PASSWORD=(your_email_password)`\
 `EMAIL_HOST=(your_smtp_host)`\
 `EMAIL_PORT=(your_smtp_port)`
 
 ## Setup
-To run this project use the following commands in project directory:
-    $ docker-compose build
-    $ docker-compose up
+To run this project use the following commands in project directory: \
+`$ docker-compose build` \
+`$ docker-compose up` \
+
+App is available at **127.0.0.1:8080**
 
 ## Available API requests
-`GET /api/machines/`
-Gets list of all machines
-`GET /api/machines/{id}/`
-Gets particular machine
-`POST /api/machines/`
-Adds new machine to database
-`PUT /api/machines/{id}/`
-Modify machine object with specified ID
-`PATCH /api/machines/`
-Modify particular field of machine object with specified ID
-`DELETE /api/machines/{id}/`
-Removes machine with specified ID from database
+`GET /api/machines/` Gets list of all machines \
+`GET /api/machines/{id}/` Gets particular machine \
+`POST /api/machines/` Adds new machine to database \
+`PUT /api/machines/{id}/` Modify machine object with specified ID \
+`PATCH /api/machines/` Modify particular field of machine object with specified ID \
+`DELETE /api/machines/{id}/` Removes machine with specified ID from database \
 
 
 ## Application view
