@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 
-urlpatterns: list[Callable] = [
+urlpatterns = [
     path("", machines.Machines.as_view()),
     path("admin/", admin.site.urls),
     path("machines/", include("machines.urls")),

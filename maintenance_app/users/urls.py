@@ -1,5 +1,3 @@
-from typing import Callable
-
 from django.contrib.auth import views as auth_views
 from django.urls import path
 from .views import users, users_profile, users_edit, users_add
