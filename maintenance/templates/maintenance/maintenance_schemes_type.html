@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Maintenance Schemes</h2>
+<hr>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Maintenance schemes for <strong>{{ schemes.0.type }}</strong> type
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Maintenance type</th>
+                    <th>Machine group</th>
+                    <th>Description</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Maintenance type</th>
+                    <th>Machine group</th>
+                    <th>Description</th>
+                    <th>Edit</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            {% for scheme in schemes %}
+                <tr>
+                    <td>{{ scheme.pk }}</td>
+                    <td>{{ scheme.type }}</td>
+                    <td><a href="{% url 'maintenance_schemes_group' scheme.machine_group_id %}">{{ scheme.machine_group.name }}</a></td>
+                    <td><a href="{% url 'maintenance_schemes_detail' scheme.pk %}">{{ scheme.description|slice:"20" }}...</a></td>
+                    <td><a href="{% url 'maintenance_schemes_edit' scheme.pk %}" class="button">Edit</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

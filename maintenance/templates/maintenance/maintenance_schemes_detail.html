@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Maintenance Scheme</h2>
+<hr>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Maintenance scheme for {{ scheme.machine_group }} on {{ scheme.type }} basis
+    </div>
+    <div class="card-body">
+        {{ scheme.description }}
+    </div>
+</div>
+
+{% endblock %}

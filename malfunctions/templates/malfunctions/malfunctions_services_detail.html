@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Service report</h2>
+<hr>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Service report <strong>#{{ services_report.pk }}</strong> for <strong>{{ services_report.malfunction_report.machine }}</strong>
+    </div>
+    <div class="card-body">
+        <div><strong>Machine: </strong>{{ services_report.malfunction_report.machine }}</div>
+        <hr>
+        <div><strong>Serviceman: </strong>{{ services_report.user }}</div>
+        <hr>
+        <div><strong>Date: </strong>{{ services_report.datetime }}</div>
+        <hr>
+        <div><strong>Result:</strong></div>
+        <div>{{ services_report.service }}</div>
+        <hr>
+        <div><strong>Description:</strong></div>
+        <div>{{ services_report.description }}</div>
+        <hr>
+        <div><strong>Attachments:</strong></div>
+        {% if services_report.image %}
+        <img src="{{ malfunction_report.image.url }}" class="img-fluid" alt="No image provided">
+        {% else %}
+        <p>No image provided</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+</html>
