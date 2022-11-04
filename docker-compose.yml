@@ -4,8 +4,6 @@ services:
   db:
     image: postgres
     restart: always
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
     ports:
       - "5000:5432"
     environment:
