@@ -18,6 +18,6 @@ class Machines(LoginRequiredMixin, View):
             )
         else:
             machines: QuerySet[Machine] = Machine.objects.all()
-        context = {"machines": machines}
+        context: dict[str, QuerySet[Machine]] = {"machines": machines}
 
         return render(request, "machines/machines.html", context)
