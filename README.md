@@ -42,7 +42,7 @@ In order to build the application you need to define environment variables in th
 DB_NAME=postgres
 DB_USER=postgres
 DB_PASSWORD=postgres
-DB_HOST=localhost
+DB_HOST=db
 DB_PORT=5432
 DEBUG=FALSE
 ```
