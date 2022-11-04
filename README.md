@@ -57,7 +57,6 @@ EMAIL_PORT=(your_smtp_port)
 
 ## Setup
 To run this project use the following commands in project directory: \
-`$ docker-compose build` \
 `$ docker-compose up`
 
 App is available at **127.0.0.1:8080** \
