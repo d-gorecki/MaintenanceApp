@@ -38,25 +38,30 @@ user and machines management, adding maintenance schemes and schedules etc. App 
 
 ## Environment
 In order to build the application you need to define environment variables in the .env file. For a quick run just copy and paste text below:
-`SECRET_KEY=8opxm+uzbo&rg7@6j)fzmznu&t2&41dwjk13zs=0bncq9ek+ne`\
-`DB_NAME=maintenance_app`\
-`DB_USER=postgres`\
-`DB_PASSWORD=postgres`\
-`DB_HOST=localhost`\
-`DB_PORT=5432`
+```
+DB_NAME=postgres
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_HOST=localhost
+DB_PORT=5432
+DEBUG=FALSE
+```
 
-In order to activate SMTP service add the following lines to .env file: \
-`EMAIL_HOST_USER=(your_email_username)`\
-`EMAIL_HOST_PASSWORD=(your_email_password)`\
-`EMAIL_HOST=(your_smtp_host)`\
-`EMAIL_PORT=(your_smtp_port)`
+In order to activate email notification service add the following lines to .env file:
+```
+EMAIL_HOST_USER=(your_email_username)
+EMAIL_HOST_PASSWORD=(your_email_password)
+EMAIL_HOST=(your_smtp_host)
+EMAIL_PORT=(your_smtp_port)
+```
 
 ## Setup
 To run this project use the following commands in project directory: \
 `$ docker-compose build` \
 `$ docker-compose up`
 
-App is available at **127.0.0.1:8080**
+App is available at **127.0.0.1:8080** \
+Initial admin account credentials `login: admin`, `password: admin`
 
 ## Available API requests
 `GET /api/machines/` Gets list of all machines \

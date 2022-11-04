@@ -3,16 +3,19 @@ version: "3.9"
 services:
   db:
     image: postgres
+    restart: always
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
     ports:
-      - "5430:5432"
+      - "5000:5432"
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
   web:
     build: .
-    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8080"
+    command: bash -c "python manage.py migrate && python manage.py initadmin && python manage.py initmodels && python manage.py runserver 0.0.0.0:8080"
     ports:
-      - "8080:8000"
+      - "8080:8080"
     depends_on:
       - db
