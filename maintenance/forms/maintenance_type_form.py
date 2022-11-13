@@ -1,7 +1,9 @@
-from typing import Union, Any
+from typing import Any, Union
+
 from django import forms
+from django.forms import Select, Textarea
+
 from maintenance.models.maintenance_type import MaintenanceType
-from django.forms import Textarea, Select
 
 
 class MaintenanceTypeForm(forms.ModelForm):

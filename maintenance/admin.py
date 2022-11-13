@@ -1,7 +1,8 @@
 from django.contrib import admin
-from maintenance.models.maintenance_type import MaintenanceType
-from maintenance.models.maintenance_schedule import MaintenanceSchedule
+
 from maintenance.models.maintenance_report import MaintenanceReport
+from maintenance.models.maintenance_schedule import MaintenanceSchedule
+from maintenance.models.maintenance_type import MaintenanceType
 
 
 class AdminMaintenanceReport(admin.ModelAdmin):

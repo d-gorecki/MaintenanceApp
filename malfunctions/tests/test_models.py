@@ -1,9 +1,10 @@
 from django.test import TestCase
+from django.utils.timezone import now as django_now
+
+from dashboard.tests import UserTestUtils
+from machines.tests.test_models import MachineTestUtils
 from malfunctions.models.malfunction_report import MalfunctionReport
 from malfunctions.models.service_report import ServiceReport
-from django.utils.timezone import now as django_now
-from machines.tests.test_models import MachineTestUtils
-from dashboard.tests import UserTestUtils
 
 
 class MalfunctionTestUtils:

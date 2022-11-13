@@ -1,6 +1,7 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
-from .views import users, users_profile, users_edit, users_add
+
+from .views import users, users_add, users_edit, users_profile
 
 urlpatterns = [
     path("", users.Users.as_view(), name="users"),

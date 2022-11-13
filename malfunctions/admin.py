@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from malfunctions.models.malfunction_report import MalfunctionReport
 from malfunctions.models.service_report import ServiceReport
 

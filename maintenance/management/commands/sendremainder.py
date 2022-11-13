@@ -1,9 +1,9 @@
+from django.core.mail import EmailMessage
 from django.core.management.base import BaseCommand, CommandError
 from django.db.models import QuerySet
+from django.utils.timezone import datetime, now, timedelta
 
 from maintenance.models.maintenance_schedule import MaintenanceSchedule
-from django.utils.timezone import datetime, timedelta, now
-from django.core.mail import EmailMessage
 
 
 class Command(BaseCommand):

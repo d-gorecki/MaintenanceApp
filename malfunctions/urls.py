@@ -1,18 +1,11 @@
-from typing import Callable
-
 from django.urls import path
-from .views import (
-    malfunctions_reports,
-    malfunctions_services,
-    malfunctions_pending,
-    malfunctions_services_detail,
-    malfunctions_reports_detail,
-    malfunctions_reports_add,
-    malfunctions_services_add,
-)
 
+from .views import (malfunctions_pending, malfunctions_reports,
+                    malfunctions_reports_add, malfunctions_reports_detail,
+                    malfunctions_services, malfunctions_services_add,
+                    malfunctions_services_detail)
 
-urlpatterns: list[Callable] = [
+urlpatterns = [
     path(
         "pending/",
         malfunctions_pending.MalfunctionsPending.as_view(),

@@ -1,7 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
+
 from machines.forms import MachineAddForm
 from maintenance_app.mixins import ManagerGroupTestMixin
 

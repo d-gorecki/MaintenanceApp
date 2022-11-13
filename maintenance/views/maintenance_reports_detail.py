@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
-from maintenance.models.maintenance_report import MaintenanceReport
 
+from maintenance.models.maintenance_report import MaintenanceReport
 from maintenance_app.mixins import ManagerMaintenanceGroupTestMixin
 
 

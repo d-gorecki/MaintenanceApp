@@ -1,7 +1,9 @@
-from typing import Union, Any
+from typing import Any, Union
+
 from django import forms
+from django.forms import DateInput, Select
+
 from maintenance.models.maintenance_schedule import MaintenanceSchedule
-from django.forms import Select, DateInput
 
 
 class MaintenanceScheduleForm(forms.ModelForm):

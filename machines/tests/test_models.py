@@ -1,4 +1,5 @@
 from django.test import TestCase
+
 from machines.models.machine import Machine
 from machines.models.machine_group import MachineGroup
 
@@ -82,11 +83,6 @@ class TestMachine(TestCase):
         name = self.machine
         field_label = name._meta.get_field("name").verbose_name
         self.assertEqual(field_label, "name")
-
-    def test_name_max_length(self):
-        name = self.machine
-        max_length = name._meta.get_field("name").max_length
-        self.assertEqual(max_length, 100)
 
     def test_number_label(self):
         number = self.machine

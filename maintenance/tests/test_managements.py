@@ -1,8 +1,10 @@
 from io import StringIO
+
+from django.core import mail
 from django.core.management import call_command
 from django.test import TestCase
 from django.utils.timezone import datetime, now, timedelta
-from django.core import mail
+
 from maintenance.tests.test_models import MaintenanceTestUtils
 
 

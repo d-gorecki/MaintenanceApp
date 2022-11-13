@@ -1,4 +1,5 @@
 from django.db import models
+
 from machines.models.machine_group import MachineGroup
 
 

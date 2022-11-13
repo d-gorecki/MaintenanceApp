@@ -1,8 +1,9 @@
+import factory
+
+from departments.models import Department
 from machines.models.machine import Machine
 from machines.models.machine_group import MachineGroup
-import factory
 from users.models import User
-from departments.models import Department
 
 
 class MachineGroupFactory(factory.django.DjangoModelFactory):

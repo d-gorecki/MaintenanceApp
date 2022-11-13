@@ -1,10 +1,11 @@
-from pyexpat.errors import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.views import View
-from users.forms.manager_user_creation_form import ManagerUserCreationForm
+from pyexpat.errors import messages
+
 from maintenance_app.mixins import ManagerGroupTestMixin
+from users.forms.manager_user_creation_form import ManagerUserCreationForm
 
 
 class UsersAdd(LoginRequiredMixin, ManagerGroupTestMixin, View):

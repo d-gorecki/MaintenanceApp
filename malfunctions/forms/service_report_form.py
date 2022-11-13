@@ -1,6 +1,8 @@
 from typing import Any, Union
+
 from django import forms
 from django.forms import Select, Textarea
+
 from malfunctions.models.malfunction_report import MalfunctionReport
 from malfunctions.models.service_report import ServiceReport
 

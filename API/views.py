@@ -1,7 +1,8 @@
-from rest_framework import viewsets, permissions
+from rest_framework import permissions, viewsets
+
+from API.permissions import ManagerPermission
 from API.serializers import MachineSerializer
 from machines.models.machine import Machine
-from API.permissions import ManagerPermission
 
 
 class MachineViewSet(viewsets.ModelViewSet):

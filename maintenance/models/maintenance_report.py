@@ -1,6 +1,7 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
 from PIL import Image
+
 from maintenance.models.maintenance_schedule import MaintenanceSchedule
 
 

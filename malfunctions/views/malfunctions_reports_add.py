@@ -1,6 +1,7 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.views import View
+
 from malfunctions.forms.report_form import ReportForm
 from malfunctions.models.malfunction_report import MalfunctionReport
 

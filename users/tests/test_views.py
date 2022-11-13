@@ -1,7 +1,8 @@
 from django.test import TestCase
 from django.urls import reverse
-from dashboard.tests import UserTestUtils
 from rest_framework import status
+
+from dashboard.tests import UserTestUtils
 
 
 class TestUsersBaseView(TestCase):

@@ -1,6 +1,7 @@
-from django.db import models
-from machines.models.machine import Machine
 from django.conf import settings
+from django.db import models
+
+from machines.models.machine import Machine
 from maintenance.models.maintenance_type import MaintenanceType
 
 

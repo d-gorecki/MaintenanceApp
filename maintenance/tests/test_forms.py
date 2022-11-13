@@ -1,7 +1,8 @@
 from django.test import TestCase
-from maintenance.forms.maintenance_type_form import MaintenanceTypeForm
+
 from maintenance.forms.maintenance_report_form import MaintenanceReportForm
 from maintenance.forms.maintenance_schedule_form import MaintenanceScheduleForm
+from maintenance.forms.maintenance_type_form import MaintenanceTypeForm
 
 
 class TestMaintenanceForms(TestCase):

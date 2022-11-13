@@ -1,11 +1,12 @@
 from django.test import TestCase
+from django.utils.timezone import now as django_now
+
+from dashboard.tests import UserTestUtils
+from machines.models.machine_group import MachineGroup
+from machines.tests.test_models import MachineTestUtils
 from maintenance.models.maintenance_report import MaintenanceReport
 from maintenance.models.maintenance_schedule import MaintenanceSchedule
 from maintenance.models.maintenance_type import MaintenanceType
-from machines.models.machine_group import MachineGroup
-from django.utils.timezone import now as django_now
-from machines.tests.test_models import MachineTestUtils
-from dashboard.tests import UserTestUtils
 
 
 class MaintenanceTestUtils:

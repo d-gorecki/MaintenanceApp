@@ -1,13 +1,10 @@
 from django.test import TestCase
 from django.urls import reverse
-from dashboard.tests import UserTestUtils
 from rest_framework import status
-from machines.tests.factory import (
-    UserFactory,
-    DepartmentFactory,
-    MachineGroupFactory,
-    MachineFactory,
-)
+
+from dashboard.tests import UserTestUtils
+from machines.tests.factory import (DepartmentFactory, MachineFactory,
+                                    MachineGroupFactory, UserFactory)
 
 
 class TestMachinesBaseView(TestCase):

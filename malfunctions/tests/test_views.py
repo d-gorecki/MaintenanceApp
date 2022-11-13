@@ -1,8 +1,9 @@
 from django.test import TestCase
 from django.urls import reverse
-from malfunctions.tests.test_models import MalfunctionTestUtils
-from dashboard.tests import UserTestUtils
 from rest_framework import status
+
+from dashboard.tests import UserTestUtils
+from malfunctions.tests.test_models import MalfunctionTestUtils
 
 
 class TestMalfunctionPendingView(TestCase):

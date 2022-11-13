@@ -1,8 +1,9 @@
 from django.test import TestCase
 from django.urls import reverse
-from users.models import User
-from departments.models import Department
 from rest_framework import status
+
+from departments.models import Department
+from users.models import User
 
 
 class UserTestUtils:
@@ -40,7 +41,7 @@ class UserTestUtils:
 class TestDashboardView(TestCase):
     @classmethod
     def setUpTestData(cls):
-        department = Department.objects.create(name="Test")
+        Department.objects.create(name="Test")
         UserTestUtils.create_user(group="manager")
         UserTestUtils.create_user(username="noprivilages", group="production")
 

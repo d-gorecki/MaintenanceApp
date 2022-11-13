@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import machines, machines_edit, machines_add
 
+from .views import machines, machines_add, machines_edit
 
 urlpatterns = [
     path("", machines.Machines.as_view(), name="machines"),

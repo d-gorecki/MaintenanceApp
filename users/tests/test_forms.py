@@ -1,6 +1,7 @@
 from django.test import TestCase
-from users.forms.user_update_form import UserUpdateForm
+
 from users.forms.manager_user_creation_form import ManagerUserCreationForm
+from users.forms.user_update_form import UserUpdateForm
 
 
 class TestUserForms(TestCase):

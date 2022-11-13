@@ -1,6 +1,8 @@
 from django.db import models
-from .machine_group import MachineGroup
+
 from departments.models import Department
+
+from .machine_group import MachineGroup
 
 
 class Machine(models.Model):

@@ -2,9 +2,10 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils.timezone import now as django_now
 from django.utils.timezone import timedelta
-from maintenance.tests.test_models import MaintenanceTestUtils
-from dashboard.tests import UserTestUtils
 from rest_framework import status
+
+from dashboard.tests import UserTestUtils
+from maintenance.tests.test_models import MaintenanceTestUtils
 
 
 class TestMaintenanceReportsBaseView(TestCase):

@@ -1,7 +1,8 @@
 from django.test import TestCase
+
+from dashboard.tests import UserTestUtils
 from malfunctions.forms.report_form import ReportForm
 from malfunctions.forms.service_report_form import ServiceReportForm
-from dashboard.tests import UserTestUtils
 from malfunctions.tests.test_models import MalfunctionTestUtils
 
 

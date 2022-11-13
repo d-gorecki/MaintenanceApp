@@ -1,18 +1,11 @@
-from django.urls import path, include
-from .views import (
-    maintenance_schemes,
-    maintenance_schedules,
-    maintenance_schedules_add,
-    maintenance_schemes_add,
-    maintenance_schemes_type,
-    maintenance_schemes_group,
-    maintenance_reports_add,
-    maintenance_schemes_detail,
-    maintenance_schemes_edit,
-    maintenance_reports_detail,
-    maintenance_schedules_edit,
-    maintenance_reports,
-)
+from django.urls import path
+
+from .views import (maintenance_reports, maintenance_reports_add,
+                    maintenance_reports_detail, maintenance_schedules,
+                    maintenance_schedules_add, maintenance_schedules_edit,
+                    maintenance_schemes, maintenance_schemes_add,
+                    maintenance_schemes_detail, maintenance_schemes_edit,
+                    maintenance_schemes_group, maintenance_schemes_type)
 
 urlpatterns = [
     path(

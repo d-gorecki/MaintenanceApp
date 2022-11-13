@@ -1,6 +1,7 @@
-from typing import OrderedDict, Any
+from typing import Any, OrderedDict
 
 from rest_framework import serializers
+
 from machines.models.machine import Machine
 
 

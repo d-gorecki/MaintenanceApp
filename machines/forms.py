@@ -1,6 +1,8 @@
 from typing import Union
+
 from django import forms
-from django.forms import Select, DateInput, TextInput
+from django.forms import DateInput, Select, TextInput
+
 from machines.models.machine import Machine
 
 

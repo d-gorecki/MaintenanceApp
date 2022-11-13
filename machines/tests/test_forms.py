@@ -1,4 +1,5 @@
 from django.test import TestCase
+
 from machines.forms import MachineAddForm
 
 

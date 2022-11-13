@@ -1,6 +1,8 @@
 from typing import Any
+
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
 from maintenance.models.maintenance_report import MaintenanceReport
 from maintenance.models.maintenance_schedule import MaintenanceSchedule
 

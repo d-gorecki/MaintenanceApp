@@ -1,11 +1,12 @@
 from django.urls import reverse
-from machines.tests.test_models import MachineTestUtils
 from rest_framework import status
 from rest_framework.test import APITestCase
-from departments.models import Department
-from machines.models.machine_group import MachineGroup
-from machines.models.machine import Machine
+
 from dashboard.tests import UserTestUtils
+from departments.models import Department
+from machines.models.machine import Machine
+from machines.models.machine_group import MachineGroup
+from machines.tests.test_models import MachineTestUtils
 
 
 class TestAPIMachines(APITestCase):

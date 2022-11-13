@@ -2,16 +2,17 @@ from typing import Union
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import QuerySet
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from plotly.offline import plot
+from django.views import View
 from plotly.graph_objs import Pie
+from plotly.offline import plot
+
+from machines.models.machine import Machine
+from maintenance.models.maintenance_report import MaintenanceReport
+from maintenance_app.mixins import ManagerGroupTestMixin
 from malfunctions.models.malfunction_report import MalfunctionReport
 from malfunctions.models.service_report import ServiceReport
-from maintenance.models.maintenance_report import MaintenanceReport
-from machines.models.machine import Machine
-from django.views import View
-from maintenance_app.mixins import ManagerGroupTestMixin
-from django.http import HttpRequest, HttpResponse
 
 
 class Dashboard(LoginRequiredMixin, ManagerGroupTestMixin, View):

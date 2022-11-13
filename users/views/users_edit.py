@@ -1,10 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.views import View
-from users.forms.user_update_form import UserUpdateForm
-from ..models import User
+
 from maintenance_app.mixins import ManagerMaintenanceGroupTestMixin
+from users.forms.user_update_form import UserUpdateForm
+
+from ..models import User
 
 
 class UsersEdit(LoginRequiredMixin, ManagerMaintenanceGroupTestMixin, View):

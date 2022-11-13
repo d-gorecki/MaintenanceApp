@@ -1,8 +1,10 @@
 from typing import Union
+
 from django import forms
+from django.forms import Select, Textarea
+
 from maintenance.models.maintenance_report import MaintenanceReport
 from maintenance.models.maintenance_schedule import MaintenanceSchedule
-from django.forms import Textarea, Select
 
 
 class MaintenanceReportForm(forms.ModelForm):
