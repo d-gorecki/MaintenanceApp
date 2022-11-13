@@ -32,6 +32,7 @@ user and machines management, adding maintenance schemes and schedules etc. App 
 ## Tools
 * precommit
 * plotly
+* [SB Admin template](https://startbootstrap.com/template/sb-admin)
 * django-crontab
 * factory_boy
 
